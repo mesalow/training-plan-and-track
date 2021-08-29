@@ -23,4 +23,14 @@ For exercises later in the program, there are different progression schemes, e.g
   - PlanInput: array of 4 days, each day is an array of exerciseConfigs, with certain constraints
   - PlanInputExerciseConfig: { name: string, progressionType: ProgressionType, ?TM: Number }
 - getPlan(name, startDay): Plan 
-- inputExercise() // unclear: better to update only the set or the whole exercise?
+- inputSetData(week, day, exerciseName, setNr, weight, reps): Plan // update one Set and get updated Plan back
+
+## Schema Design
+- exercise: ex_id, name
+- muscle_group: msc_id, muscle // muscle group per exercise for later
+- exercise_muscle_map: ex_ex_id, msc_msc_id
+- program: prg_id, name, week_number, day_number // only one entry for now, jacked'n'tan 2.0 6 weeks, 
+- plan: pl_id, prg_prg_id, start_day
+- sets: pl_pl_id, week, day, exerciseName, number, weight, reps, perceived_effort, max_effort (bool)
+
+## Logic Design tbd
