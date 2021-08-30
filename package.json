@@ -1,0 +1,32 @@
+{
+  "name": "training-plan-and-track",
+  "version": "0.1.0",
+  "description": "An app to plan and track one's training sessions",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mesalow/training-plan-and-track.git"
+  },
+  "keywords": [
+    "gzcl",
+    "strength-training",
+    "progress-tracking",
+    "typescript",
+    "sqlite",
+    "node.js"
+  ],
+  "author": "mesalow",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mesalow/training-plan-and-track/issues"
+  },
+  "homepage": "https://github.com/mesalow/training-plan-and-track#readme",
+  "dependencies": {
+    "sqlite": "^4.0.23",
+    "sqlite3": "^5.0.2"
+  }
+}
