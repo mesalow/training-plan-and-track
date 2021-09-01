@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+    app:
+        image: node:16-alpine
+        command: sh -c "yarn install && cd build && node index.js"
+        ports:
+            - 3000:3000
+        working_dir: /app
+        volumes: 
+            - ./:/app
