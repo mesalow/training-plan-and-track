@@ -1,5 +1,16 @@
 {
     "compilerOptions": {
-        "outDir": "./build/"
-    }
+        "target": "ES2015",
+        "outDir": "./build/",
+        "moduleResolution": "node",
+        
+    },
+    "buildOptions": {
+        
+    },
+    "watchOptions": {
+        "watchDirectory": "useFsEvents",
+        "watchFile": "useFsEvents",
+    },
+    "include": ["src/**/*"]
 }
