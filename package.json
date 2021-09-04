@@ -7,7 +7,6 @@
     "test": "test",
     "build": "tsc --project ./tsconfig.json --watch"
   },
-  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mesalow/training-plan-and-track.git"
