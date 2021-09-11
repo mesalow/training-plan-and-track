@@ -7,11 +7,11 @@ import { open } from 'sqlite'
 (async () => {
     // open the database
     const db = await open({
-        filename: '../database.db',
+        filename: './database.db',
         driver: sqlite3.Database
     })
     await db.migrate({
-        migrationsPath: '../migrations'
+        migrationsPath: './migrations'
     }).catch(console.error)
 
     await db.run("INSERT INTO exercise (ex_name) VALUES(?)", "Squat").catch(console.error)
