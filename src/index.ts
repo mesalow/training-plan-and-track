@@ -11,7 +11,6 @@ import { open } from 'sqlite'
         driver: sqlite3.Database
     })
     await db.migrate({
-        migrationsPath: './migrations'
     }).catch(console.error)
 
     await db.run("INSERT INTO exercise (ex_name) VALUES(?)", "Squat").catch(console.error)
