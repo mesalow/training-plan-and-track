@@ -1,10 +1,12 @@
-version: "3.8"
+version: "3.8" 
+volumes: 
+    node_modules:
 services:
     app:
-        image: node:16-alpine
-        command: sh -c "yarn install && cd build && node index.js"
-        ports:
-            - 3000:3000
-        working_dir: /app
+        build: ./
+        image: training-app
         volumes: 
             - ./:/app
+            - node_modules:/app/node_modules # this ensures that modules from windows will not be mounted into the container, but persisted in their own named vol
+        ports:
+            - 3000:3000
