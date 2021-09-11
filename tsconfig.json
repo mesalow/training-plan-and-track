@@ -2,18 +2,11 @@
     "compilerOptions": {
         "target": "es2020",
         "lib": ["es2020"],
-        "outDir": "./build/",
+        "outDir": "build",
+        "rootDir": "src",
         "module": "CommonJS",
         "moduleResolution": "node",
         "esModuleInterop": true,
         "skipLibCheck": true
     },
-    "buildOptions": {
-        
-    },
-    "watchOptions": {
-        "watchDirectory": "useFsEvents",
-        "watchFile": "useFsEvents",
-    },
-    "include": ["src/**/*"]
 }

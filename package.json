@@ -28,7 +28,6 @@
   },
   "homepage": "https://github.com/mesalow/training-plan-and-track#readme",
   "devDependencies": {
-    "ts-node": "^10.2.1",
     "concurrently": "^6.2.1"
   },
   "dependencies": {
