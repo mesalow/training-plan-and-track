@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "test": "test",
-    "start": "npx nodemon --legacy-watch build/index.js",
+    "start": "npx concurrently -k -n TSC,NODEMON -c blue,gray \"tsc --project ./tsconfig.json --watch\" \"nodemon --legacy-watch build/index.js\"",
     "build": "tsc --project ./tsconfig.json",
     "build-watch": "tsc --project ./tsconfig.json --watch"
   },
@@ -28,7 +28,8 @@
   },
   "homepage": "https://github.com/mesalow/training-plan-and-track#readme",
   "devDependencies": {
-    "ts-node": "^10.2.1"
+    "ts-node": "^10.2.1",
+    "concurrently": "^6.2.1"
   },
   "dependencies": {
     "@types/node": "^16.7.10",
