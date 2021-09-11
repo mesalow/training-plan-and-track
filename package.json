@@ -5,7 +5,9 @@
   "main": "build/index.js",
   "scripts": {
     "test": "test",
-    "build": "tsc --project ./tsconfig.json --watch"
+    "start": "npx nodemon --legacy-watch build/index.js",
+    "build": "tsc --project ./tsconfig.json",
+    "build-watch": "tsc --project ./tsconfig.json --watch"
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,9 @@
     "url": "https://github.com/mesalow/training-plan-and-track/issues"
   },
   "homepage": "https://github.com/mesalow/training-plan-and-track#readme",
+  "devDependencies": {
+    "ts-node": "^10.2.1"
+  },
   "dependencies": {
     "@types/node": "^16.7.10",
     "@types/sqlite3": "^3.1.7",
