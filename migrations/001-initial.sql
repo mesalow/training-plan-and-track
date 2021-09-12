@@ -4,12 +4,12 @@
 
 CREATE TABLE IF NOT EXISTS exercise (
     ex_id INTEGER PRIMARY KEY,
-    ex_name TEXT NOT NULL
+    ex_name TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS muscle_group (
     musc_id INTEGER PRIMARY KEY,
-    musc_name TEXT NOT NULL
+    musc_name TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS ex_msc_map (
