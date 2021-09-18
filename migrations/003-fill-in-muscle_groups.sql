@@ -1,0 +1,17 @@
+INSERT INTO muscle_group (musc_name) VALUES ('Quad');
+INSERT INTO muscle_group (musc_name) VALUES ('Leg Biceps');
+INSERT INTO muscle_group (musc_name) VALUES ('Calf');
+INSERT INTO muscle_group (musc_name) VALUES ('Glute');
+INSERT INTO muscle_group (musc_name) VALUES ('Lower Back');
+INSERT INTO muscle_group (musc_name) VALUES ('Lat');
+INSERT INTO muscle_group (musc_name) VALUES ('Trapezius');
+INSERT INTO muscle_group (musc_name) VALUES ('Front Delt');
+INSERT INTO muscle_group (musc_name) VALUES ('Side Delt');
+INSERT INTO muscle_group (musc_name) VALUES ('Rear Delt');
+INSERT INTO muscle_group (musc_name) VALUES ('Pec');
+INSERT INTO muscle_group (musc_name) VALUES ('Upper Abs');
+INSERT INTO muscle_group (musc_name) VALUES ('Lower Abs');
+INSERT INTO muscle_group (musc_name) VALUES ('Neck');
+INSERT INTO muscle_group (musc_name) VALUES ('Biceps');
+INSERT INTO muscle_group (musc_name) VALUES ('Triceps');
+INSERT INTO muscle_group (musc_name) VALUES ('Forearms');
