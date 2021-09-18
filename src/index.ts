@@ -10,11 +10,7 @@ import { open } from 'sqlite'
         filename: './database.db',
         driver: sqlite3.Database
     })
-    await db.migrate({
-    }).catch(console.error)
-
-    await db.run("INSERT INTO exercise (ex_name) VALUES(?)", "Squat").catch(console.error)
-
+    
     const server = http.createServer((req, res) => {
         console.log('server listening');
         req.on('data', (data) => {
