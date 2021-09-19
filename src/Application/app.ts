@@ -1,22 +1,21 @@
-import { Server } from './Server/server';
+import { Server } from "./Server/server";
 
-import * as sqlite3 from "sqlite3";
-import { open } from "sqlite";
-import { Router } from './Server/router';
+import { Router } from "./Server/router";
+import { RepositoryManager } from "../Infrastructure/RepositoryManager";
 
 export class App {
+  public repositoryManager: RepositoryManager;
+  public router: Router;
+  private server: Server;
   constructor() {
     this.init();
   }
 
   async init() {
     // open the database
-    const db = await open({
-      filename: "./database.db",
-      driver: sqlite3.Database,
-    });
-    const router = new Router(db);
 
-    const server = new Server({port:3000}, router);
+    this.repositoryManager = new RepositoryManager();
+    this.router = new Router(this);
+    this.server = new Server({ port: 3000 }, this.router);
   }
 }

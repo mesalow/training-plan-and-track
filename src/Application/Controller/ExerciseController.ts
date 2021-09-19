@@ -3,15 +3,16 @@ import { IBaseController } from "./Controller";
 import { appDebug as debug } from "../../Helpers/debuggers";
 
 export default class ExerciseController implements IBaseController {
-  private db;
-  constructor(db: any) {
-    this.db = db;
+  private app;
+  constructor(app: any) {
+    this.app = app;
   }
   async handle(
     request: IncomingMessage,
     requestBody: string,
   ) {
-    const result = await this.db.get("SELECT * FROM exercise");
+    const exerciseRepo = this.app.repositoryManager.getRepo('ExerciseRepository');
+    const result = exerciseRepo.getAll();
     debug("result", result);
     return "Hello " + result.ex_name;
   }
