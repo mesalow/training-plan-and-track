@@ -1,9 +1,9 @@
-import * as http from "http";
+import { Server } from './Server/server';
 
 import * as sqlite3 from "sqlite3";
 import { open } from "sqlite";
+import { Router } from './Server/router';
 
-// this is a top-level await
 export class App {
   constructor() {
     this.init();
@@ -15,21 +15,8 @@ export class App {
       filename: "./database.db",
       driver: sqlite3.Database,
     });
+    const router = new Router(db);
 
-    const server = http.createServer((req, res) => {
-      console.log("server listening");
-      req.on("data", (data) => {
-        console.log("receiving data");
-      });
-      req.on("end", async () => {
-        console.log("req end");
-        const result = await db.get("SELECT * FROM exercise");
-        console.log("result", result);
-        res.write("Hello " + result.ex_name);
-        res.end();
-      });
-    });
-
-    server.listen(3000);
+    const server = new Server({port:3000}, router);
   }
 }
