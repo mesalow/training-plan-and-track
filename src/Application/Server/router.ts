@@ -16,31 +16,30 @@ export class Router {
     debug("route", route);
     const controller = await this.route(route);
     let requestBody;
-    request.on('data', (chunk) => {
+    request.on("data", (chunk) => {
         requestBody += chunk;
     });
-    request.on('end', async () => {
-        debug('Router::listener, request end');
+    request.on("end", async () => {
+      debug("Router::listener, request end");
         const responseBody = await controller.handle(request, requestBody);
         response.write(responseBody);
         response.end();
-    })
+    });
   }
 
   async route(route: string): Promise<IBaseController> {
     const className = this.getControllerClassName(route);
-    debug('Router::route, Controller-Class found: ', className)
-    const { default: Controller} = await import("../Controller/"+className);
-    return new Controller(this.db)
+    debug("Router::route, Controller-Class found: ", className);
+    const { default: Controller } = await import("../Controller/" + className);
   }
 
   getControllerClassName(route: string) {
       const routings = {
-        '/exercise': 'ExerciseController'
-      }
+      "/exercise": "ExerciseController",
+    };
       if (routings[route]) {
           return routings[route];
       }
-      return 'NotFoundController';
+    return "NotFoundController";
   }
 }
