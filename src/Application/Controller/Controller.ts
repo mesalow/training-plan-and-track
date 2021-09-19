@@ -4,6 +4,5 @@ export interface IControllerConstructor  {
     new (db): IBaseController;
 }
 export interface IBaseController {
-
-    handle(request: IncomingMessage, response: ServerResponse): void;
+    handle(request: IncomingMessage, requestBody: string): Promise<string>;
 }

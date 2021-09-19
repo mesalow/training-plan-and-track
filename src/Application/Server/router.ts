@@ -14,13 +14,22 @@ export class Router {
   async listener(request: IncomingMessage, response: ServerResponse) {
     const route = request.url;
     debug("route", route);
-
     const controller = await this.route(route);
-    controller.handle(request, response);
+    let requestBody;
+    request.on('data', (chunk) => {
+        requestBody += chunk;
+    });
+    request.on('end', async () => {
+        debug('Router::listener, request end');
+        const responseBody = await controller.handle(request, requestBody);
+        response.write(responseBody);
+        response.end();
+    })
   }
 
   async route(route: string): Promise<IBaseController> {
     const className = this.getControllerClassName(route);
+    debug('Router::route, Controller-Class found: ', className)
     const { default: Controller} = await import("../Controller/"+className);
     return new Controller(this.db)
   }
