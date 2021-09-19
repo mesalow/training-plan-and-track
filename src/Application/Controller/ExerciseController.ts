@@ -1,5 +1,6 @@
 import { IncomingMessage, ServerResponse } from "http";
 import { IBaseController } from "./Controller";
+import { appDebug as debug } from "../../Helpers/debuggers";
 
 export default class ExerciseController implements IBaseController {
   private db;
@@ -8,13 +9,13 @@ export default class ExerciseController implements IBaseController {
   }
   handle(request: IncomingMessage, response: ServerResponse) {
     request.on("data", (data) => {
-      console.log("receiving data");
+      debug("receiving data");
     });
     request.on("end", async () => {
-      console.log("req end");
+      debug("req end");
 
       const result = await this.db.get("SELECT * FROM exercise");
-      console.log("result", result);
+      debug("result", result);
       response.write("Hello " + result.ex_name);
       response.end();
     });
