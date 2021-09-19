@@ -1,7 +1,8 @@
 import * as sqlite3 from "sqlite3";
 
 import { Database } from "sqlite";
-import { ExerciseController } from "../Controller/ExerciseController";
+import { IBaseController } from "../Controller/Controller";
+import { IncomingMessage, ServerResponse } from "http";
 
 export class Router {
   private db: Database<sqlite3.Database, sqlite3.Statement>;
@@ -10,9 +11,24 @@ export class Router {
     this.db = db;
   }
 
-  listener(request, response) {
-    console.log("server listening");
-    const controller = new ExerciseController(this.db);
+  async listener(request: IncomingMessage, response: ServerResponse) {
+    const route = request.url;
+    console.log("route", route);
+
+    const controller = await this.route(route);
     controller.handle(request, response);
+  }
+
+  async route(route: string): Promise<IBaseController> {
+    const className = this.getControllerClassName(route);
+    const { default: Controller} = await import("../Controller/"+className);
+    console.log('exported:', Controller)
+    return new Controller(this.db)
+  }
+
+  getControllerClassName(route: string) {
+      if (route === '/exercise') {
+          return 'ExerciseController';
+      }
   }
 }
