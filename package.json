@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "test": "mocha",
-    "start": "npx concurrently -k -n TSC,NODEMON -c blue,gray \"tsc --project ./tsconfig.json --watch\" \"DEBUG='app' nodemon --legacy-watch build/index.js\"",
+    "start": "npx concurrently -k -n TSC,NODEMON -c blue,gray \"tsc --project ./tsconfig.json --watch\" \"DEBUG='app, infra' nodemon --legacy-watch build/index.js\"",
     "build": "tsc --project ./tsconfig.json",
     "build-watch": "tsc --project ./tsconfig.json --watch"
   },

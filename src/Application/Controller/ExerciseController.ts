@@ -12,8 +12,8 @@ export default class ExerciseController implements IBaseController {
     requestBody: string,
   ) {
     const exerciseRepo = this.app.repositoryManager.getRepo('ExerciseRepository');
-    const result = exerciseRepo.getAll();
+    const result = await exerciseRepo.getAll();
     debug("result", result);
-    return "Hello " + result.ex_name;
+    return JSON.stringify(result);
   }
 }
