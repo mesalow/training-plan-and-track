@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS plan (
     pl_id INTEGER PRIMARY KEY,
     prg_prg_id INTEGER NOT NULL,
     start_day TEXT NOT NULL,
-    FOREIGN KEY (prg_prg_id) REFERENCES program(prg_id_id)
+    FOREIGN KEY (prg_prg_id) REFERENCES program(prg_id)
 );
 
 CREATE TABLE IF NOT EXISTS actual_set (
