@@ -4,5 +4,7 @@ export interface IControllerConstructor  {
     new (app): IBaseController;
 }
 export interface IBaseController {
-    handle(request: IncomingMessage, requestBody: string): Promise<string>;
+    handleGetAll(request: IncomingMessage, requestBody: string): Promise<string>;
+    handleGet(request: IncomingMessage, requestBody: string): Promise<string>;
+    handlePost(request: IncomingMessage, requestBody: string): Promise<string>;
 }

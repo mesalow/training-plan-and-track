@@ -13,43 +13,45 @@ export default class PlanController implements IBaseController {
   constructor(app: App) {
     this.app = app;
   }
-  async handle(request: IncomingMessage, requestBody: string) {
-    /**
-     * creating a new plan needs the following data
-     * 4 days
-     * each day needs one exercise with progression t1
-     * 3 ex with t2
-     * 3-4 ex with t3
-     * each exercise has a name and a progression scheme and, depending on the progression scheme, a training max
-     * serialized:
-     * { programId: 1,
-     * days: [
-     * { day: 1,
-     *   exercises: [
-     *      {name: 'Squat', progression: 'T1', tm: 115},
-     *      {name: 'Hack Squat', progression: 'T2a', tm: 130},
-     *      {name: 'Nordic Curls', progression: 'T2b'}, // progression T2b does not depend on tm
-     *   ]
-     * },
-     * {day: 2,
-     *   exercises: [
-     *      {name: 'Bench Press', progression: 'T1', tm: 95},
-     *      {name: 'Close-grip Press', progression: 'T2a', tm: 75},
-     *      {name: 'DB Press', progression: 'T2b'}, // progression T2b does not depend on tm
-     *   ]
-     * }
-     * ]
-     * }
-     */
-    if (request.method === "GET") {
-      return this.handleGetAll();
-    }
-    if (request.method === "POST") {
-      return this.handlePost(requestBody);
+  /**
+   * creating a new plan needs the following data
+   * 4 days
+   * each day needs one exercise with progression t1
+   * 3 ex with t2
+   * 3-4 ex with t3
+   * each exercise has a name and a progression scheme and, depending on the progression scheme, a training max
+   * serialized:
+   * { programId: 1,
+   * days: [
+   * { day: 1,
+   *   exercises: [
+   *      {name: 'Squat', progression: 'T1', tm: 115},
+   *      {name: 'Hack Squat', progression: 'T2a', tm: 130},
+   *      {name: 'Nordic Curls', progression: 'T2b'}, // progression T2b does not depend on tm
+   *   ]
+   * },
+   * {day: 2,
+   *   exercises: [
+   *      {name: 'Bench Press', progression: 'T1', tm: 95},
+   *      {name: 'Close-grip Press', progression: 'T2a', tm: 75},
+   *      {name: 'DB Press', progression: 'T2b'}, // progression T2b does not depend on tm
+   *   ]
+   * }
+   * ]
+   * }
+   */
+
+  async handleGetAll() {
+    try {
+      const planRepository = this.app.repositoryManager.getPlanRepo();
+      const result = await planRepository.getAll();
+      return JSON.stringify(result);
+    } catch (error) {
+      return "NOT OK";
     }
   }
 
-  async handleGetAll() {
+  async handleGet() {
     try {
       const planRepository = this.app.repositoryManager.getPlanRepo();
       const result = await planRepository.getAll();
