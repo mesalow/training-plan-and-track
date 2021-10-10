@@ -1,7 +1,7 @@
 import { IncomingMessage, ServerResponse } from "http";
 import { IBaseController } from "./Controller";
 import { appDebug as debug } from "../../Helpers/debuggers";
-import { PlanRepository } from "../../Infrastructure/PlanRepository";
+import { ExerciseDTO, PlanRepository } from "../../Infrastructure/PlanRepository";
 import { App } from "../app";
 import { Validator } from "./Validator";
 
@@ -59,7 +59,7 @@ export default class PlanController implements IBaseController {
         for (const plannedDay of plannedDays) {
           const dayId = await planRepository.addDay(planId, plannedDay.day);
           for (const plannedExercise of plannedDay.exercises) {
-            await planRepository.addExercise(planId, dayId, plannedExercise);
+            await planRepository.addExercise(dayId, plannedExercise);
           }
         }
         // application need to do the following things
