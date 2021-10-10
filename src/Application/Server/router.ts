@@ -39,7 +39,7 @@ export class Router {
     return new Controller(this.app);
   }
 
-  private getControllerClassName(route: string) {
+  public getControllerClassName(route: string) {
     const routings = {
       "exercise": "ExerciseController", // get all exercises
       "plan": "PlanController", // create new Plan
