@@ -4,6 +4,7 @@
 
 CREATE TABLE IF NOT EXISTS planned_day (
     pld_id INTEGER PRIMARY KEY,
+    day_number INTEGER NOT NULL,
     pl_pl_id INTEGER NOT NULL,
     FOREIGN KEY (pl_pl_id) REFERENCES plan(pl_id)
 );
