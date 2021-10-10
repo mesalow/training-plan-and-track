@@ -41,7 +41,7 @@ export default class PlanController implements IBaseController {
    * }
    */
 
-  async handleGetAll() {
+  async handleGetAll(params, requestBody) {
     try {
       const planRepository = this.app.repositoryManager.getPlanRepo();
       const result = await planRepository.getAll();
@@ -51,7 +51,7 @@ export default class PlanController implements IBaseController {
     }
   }
 
-  async handleGet() {
+  async handleGet(params, requestBody) {
     try {
       const planRepository = this.app.repositoryManager.getPlanRepo();
       const result = await planRepository.getAll();
@@ -61,7 +61,7 @@ export default class PlanController implements IBaseController {
     }
   }
 
-  async handlePost(requestBody) {
+  async handlePost(params, requestBody) {
     debug("Controller/PlanController::handle: requestBody: %o", requestBody);
     try {
       const json = JSON.parse(requestBody);

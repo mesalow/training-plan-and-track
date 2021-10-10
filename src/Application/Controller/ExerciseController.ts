@@ -9,8 +9,7 @@ export default class ExerciseController implements IBaseController {
     this.app = app;
   }
   async handleGetAll(
-    request: IncomingMessage,
-    requestBody: string,
+    params, requestBody
   ) {
     const exerciseRepo = this.app.repositoryManager.getExerciseRepo();
     const result = await exerciseRepo.getAll();
@@ -18,14 +17,12 @@ export default class ExerciseController implements IBaseController {
     return JSON.stringify(result);
   }
   async handleGet(
-    request: IncomingMessage,
-    requestBody: string,
+    params, requestBody
   ) {
     return "NOT IMPLEMENTED";
   }
   async handlePost(
-    request: IncomingMessage,
-    requestBody: string,
+    params, requestBody
   ) {
     return "NOT IMPLEMENTED";
   }

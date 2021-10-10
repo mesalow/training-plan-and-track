@@ -2,13 +2,13 @@ import { IBaseController } from "./Controller";
 
 export default class NotFoundController implements IBaseController {
   constructor() {}
-  async handleGetAll(request, requestBody) {
+  async handleGetAll(params, requestBody) {
     return "Not found";
   }
-  async handleGet(request, requestBody) {
+  async handleGet(params, requestBody) {
     return "Not found";
   }
-  async handlePost(request, requestBody) {
+  async handlePost(params, requestBody) {
     return "Not found";
   }
 }

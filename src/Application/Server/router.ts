@@ -26,7 +26,7 @@ export class Router {
     });
     request.on("end", async () => {
       debug("Server/Router::listener, request end");
-      const responseBody = await controller[methodName](request, requestBody);
+      const responseBody = await controller[methodName](params, requestBody);
       response.write(responseBody);
       response.end();
     });
