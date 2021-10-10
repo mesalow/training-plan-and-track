@@ -52,17 +52,24 @@ export default class PlanController implements IBaseController {
   }
 
   async handleGet(params, requestBody) {
+    debug("Controller/PlanController::handleGet: params: %o", params);
     try {
+      if (params.length !== 2) {
+        return "NOT OK";
+      }
+      const planId = params[0];
+      const dayNumber = params[1];
       const planRepository = this.app.repositoryManager.getPlanRepo();
-      const result = await planRepository.getAll();
+      const result = await planRepository.getPlannedExercises(planId, dayNumber);
       return JSON.stringify(result);
     } catch (error) {
+      console.error(error);
       return "NOT OK";
     }
   }
 
   async handlePost(params, requestBody) {
-    debug("Controller/PlanController::handle: requestBody: %o", requestBody);
+    debug("Controller/PlanController::handlePost: requestBody: %o", requestBody);
     try {
       const json = JSON.parse(requestBody);
 
@@ -91,7 +98,7 @@ export default class PlanController implements IBaseController {
        */
     } catch (error) {
       console.error(
-        "Controller/PlanController::handle: Error handling the request: " +
+        "Controller/PlanController::handlePost: Error handling the request: " +
           error
       );
       return "NOT OK";

@@ -93,6 +93,24 @@ export class PlanRepository {
 
     return;
   }
+
+  async getPlannedExercises(planId: number, dayNumber:number): Promise<any>
+  {
+    debug(`ExerciseRepository::getPlannedExercises, planId ${planId}, dayNumber ${dayNumber}`);
+    const resultSet = await this.db.all(`
+      SELECT ex_name, pt_description, tm
+      FROM planned_exercise 
+      JOIN planned_day on planned_day.pld_id = planned_exercise.pld_pld_id
+      JOIN plan on plan.pl_id = planned_day.pl_pl_id
+      JOIN progression_type on progression_type.pt_id = planned_exercise.pt_pt_id
+      JOIN exercise on exercise.ex_id = planned_exercise.ex_ex_id
+      WHERE plan.pl_id = ?
+      AND planned_day.day_number = ?
+    `, [planId, dayNumber]);
+    debug(`ExerciseRepository::getPlannedExercises, resultSet ${resultSet}`);
+
+    return resultSet;
+  }
 }
 
 export interface ExerciseDTO {
