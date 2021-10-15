@@ -7,6 +7,7 @@ import {
 } from "../../Infrastructure/PlanRepository";
 import { App } from "../app";
 import { Validator } from "./Validator";
+import { JackednTan2 } from "../../Domain/Program/JackednTan2";
 
 export default class PlanController implements IBaseController {
   private app: App;
@@ -40,7 +41,12 @@ export default class PlanController implements IBaseController {
    * ]
    * }
    */
-
+  /**
+   * getAll should give us back all plans we ever did
+   * @param params 
+   * @param requestBody 
+   * @returns 
+   */
   async handleGetAll(params, requestBody) {
     try {
       const planRepository = this.app.repositoryManager.getPlanRepo();
@@ -50,18 +56,29 @@ export default class PlanController implements IBaseController {
       return "NOT OK";
     }
   }
-
+  /**
+   * specific get with /plan/{planId}/{weekNumber}/{dayNumber} -> all exercises for this day
+   * the bare planned exercises are not useful - we need to complement them with the calculated weights and sets from the program
+   * @param params 
+   * @param requestBody 
+   * @returns 
+   */
   async handleGet(params, requestBody) {
     debug("Controller/PlanController::handleGet: params: %o", params);
     try {
-      if (params.length !== 2) {
+      if (params.length !== 3) {
         return "NOT OK";
       }
       const planId = params[0];
-      const dayNumber = params[1];
+      const weekNumber = params[1];
+      const dayNumber = params[2];
       const planRepository = this.app.repositoryManager.getPlanRepo();
       const result = await planRepository.getPlannedExercises(planId, dayNumber);
-      return JSON.stringify(result);
+      const trainingModel = new JackednTan2();
+      const prescribedExercises = result.map((exercise) => {
+        return {name: exercise.name, sets: trainingModel.getExpectedSets(weekNumber,exercise.progression, exercise.tm)}
+      })
+      return JSON.stringify(prescribedExercises);
     } catch (error) {
       console.error(error);
       return "NOT OK";
