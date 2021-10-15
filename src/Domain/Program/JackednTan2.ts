@@ -43,7 +43,12 @@ function T1(weekNumber, tm): ExpectedSet[] {
   }
 }
 
-export type ExpectedSet = RepMaxSet | StraightSet | MaxRepSet;
+export type ExpectedSet =
+  | RepMaxSet
+  | StraightSet
+  | MaxRepSet
+  | FoundWeightStraightSet
+  | FoundWeightAndMaxRepSet;
 
 interface RepMaxSet {
   weight: "RM";
@@ -57,5 +62,14 @@ interface StraightSet {
 
 interface MaxRepSet {
   weight: number;
+  reps: "MR";
+}
+interface FoundWeightStraightSet {
+  weight: "Set1";
+  reps: number;
+}
+
+interface FoundWeightAndMaxRepSet {
+  weight: "Set1";
   reps: "MR";
 }
