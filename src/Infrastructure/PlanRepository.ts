@@ -13,12 +13,12 @@ export class PlanRepository {
         FROM plan
         JOIN program on program.prg_id = plan.prg_prg_id
          `);
-    debug("ExerciseRepository::getAll, result %o", resultSet);
+    debug("PlanRepository::getAll, result %o", resultSet);
     return resultSet;
   }
 
   async add(programId: number, startDay: string): Promise<number> {
-    debug("ExerciseRepository::add, programId %n, startDay %s", programId, startDay);
+    debug("PlanRepository::add, programId %n, startDay %s", programId, startDay);
     const programRow = await this.db.get(
       `SELECT prg_name
      FROM program
@@ -40,7 +40,7 @@ export class PlanRepository {
     `,
       [programId, startDay]
     );
-    debug("ExerciseRepository::add, resultSet %o", planRow);
+    debug("PlanRepository::add, resultSet %o", planRow);
     if (!planRow) {
       throw new Error(`insert of plan for programId ${programId} failed`)
     }
@@ -94,9 +94,9 @@ export class PlanRepository {
     return;
   }
 
-  async getPlannedExercises(planId: number, dayNumber:number): Promise<any>
+  async getPlannedExercises(planId: number, dayNumber:number): Promise<ExerciseDTO[]>
   {
-    debug(`ExerciseRepository::getPlannedExercises, planId ${planId}, dayNumber ${dayNumber}`);
+    debug(`PlanRepository::getPlannedExercises, planId ${planId}, dayNumber ${dayNumber}`);
     const resultSet = await this.db.all(`
       SELECT ex_name, pt_description, tm
       FROM planned_exercise 
@@ -107,14 +107,20 @@ export class PlanRepository {
       WHERE plan.pl_id = ?
       AND planned_day.day_number = ?
     `, [planId, dayNumber]);
-    debug(`ExerciseRepository::getPlannedExercises, resultSet ${resultSet}`);
+    debug('PlanRepository::getPlannedExercises, resultSet %o', resultSet);
 
-    return resultSet;
+    return resultSet.map(row => {
+      return {
+        name: row.ex_name,
+        progression: row.pt_description,
+        tm: row.tm
+      }
+    });
   }
 }
 
 export interface ExerciseDTO {
   name: string;
   progression: string;
-  tm: Number | null;
+  tm: number | null;
 }
