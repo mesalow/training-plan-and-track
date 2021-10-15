@@ -8,3 +8,7 @@ export interface IBaseController {
     handleGet(params: string[], requestBody: string): Promise<string>;
     handlePost(params: string[], requestBody: string): Promise<string>;
 }
+
+export interface IFileController {
+    handle(filePath: string): Promise<string>;
+}
