@@ -1,0 +1,21 @@
+version: "3.8" 
+volumes: 
+    node_modules_server:
+    node_modules_client:
+services:
+    app:
+        build: ./server/
+        image: training-app
+        volumes: 
+            - ./server:/app
+            - ./client:/app/client
+            - node_modules_server:/app/node_modules # this ensures that modules from windows will not be mounted into the container, but persisted in their own named vol
+        ports:
+            - 3000:3000
+    client:
+        build: ./client/
+        image: training-app-client
+        volumes:
+            - ./client/src:/app/src
+            - ./client/dist:/app/dist
+            - node_modules_client:/app/node_modules
