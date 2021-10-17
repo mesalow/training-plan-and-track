@@ -2,8 +2,8 @@
 FROM node:16-alpine
 WORKDIR /app
 RUN apk add --no-cache bash
-COPY package.json yarn.lock babel.config.js vue.config.js ./
-RUN yarn install
+COPY package.json babel.config.js vue.config.js ./
 COPY . ./
-RUN yarn run build
+RUN yarn install
+RUN yarn build
 CMD ["yarn", "watchbuild"]
