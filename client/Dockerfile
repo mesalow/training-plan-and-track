@@ -1,9 +1,9 @@
 # syntax=docker/dockerfile:1
-FROM node-alpine:latest
+FROM node:16-alpine
 WORKDIR /app
 RUN apk add --no-cache bash
 COPY package.json yarn.lock ./
-RUN yarn global add @vue/cli
+RUN yarn install
 COPY . ./
-RUN yarn build
-CMD ["yarn", "start"]
+RUN yarn run build
+CMD ["yarn", "watchbuild"]

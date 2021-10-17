@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "watchbuild": "vue-cli-service build --mod dev --watch",
+    "build": "vue-cli-service build --mode dev",
+    "watchbuild": "vue-cli-service build --mode dev --watch",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
