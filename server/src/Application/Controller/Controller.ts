@@ -10,5 +10,6 @@ export interface IBaseController {
 }
 
 export interface IFileController {
-    handle(filePath: string): Promise<string>;
+    handleTextFile(filePath: string): Promise<string>;
+    handleBinaryFile(filePath: string): Promise<Buffer>;
 }

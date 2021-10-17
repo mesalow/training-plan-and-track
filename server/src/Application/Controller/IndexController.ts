@@ -1,10 +1,9 @@
 import { readFile } from "fs/promises";
-import { IFileController } from "./Controller";
 
 
-export default class IndexController implements IFileController {
+export default class IndexController {
     async handle(_filePath) {
-        const html = await readFile(__dirname+'/../../../client/static/index.html');
+        const html = await readFile(__dirname+'/../../../client/files/index.html');
         return html.toString();
     }
 }

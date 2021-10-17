@@ -17,12 +17,12 @@ export class Router {
     /**
      * route has the form /param1/param2, the split means, that the first element - here called _leading - will be an empty string
      */
-    const [_leading, type, ...rest] = route.split('/');
-    if (type === 'api') {
+    const [_leading, type, ...rest] = route.split("/");
+    if (type === "api") {
       /**
        * RESTish API, first param is the resource request, the following are params
        */
-      const [ resource, ...params ] = rest;
+      const [resource, ...params] = rest;
       const controller = await this.routeAPI(resource);
       const reqMethod = request.method;
       const methodName = this.getMethod(reqMethod, params);
@@ -37,25 +37,30 @@ export class Router {
         response.write(responseBody);
         response.end();
       });
-    } else if (type === 'files') {
+    } else if (type === "files") {
       /**
        * static routes, variable rest holds the filePath
        */
-      request.on("data", (chunk) => {
-      });
+      request.on("data", (chunk) => {});
       request.on("end", async () => {
         debug("Server/Router::listener, request end");
         const controller = new FileController();
-        const responseBody = await controller.handle(rest.join('/'));
-        response.write(responseBody);
+        const fileName = rest[rest.length - 1];
+        const fileType = fileName.split(".")[1];
+        if (['js','css','html'].includes(fileType)) {
+          const responseBody = await controller.handleTextFile(rest.join("/"));
+          response.write(responseBody);
+        } else {
+          const responseBody = await controller.handleBinaryFile(rest.join("/"));
+          response.write(responseBody);
+        }
         response.end();
       });
     } else if (type === "") {
       /**
        * root route, just serve Index
        */
-       request.on("data", (chunk) => {
-      });
+      request.on("data", (chunk) => {});
       request.on("end", async () => {
         debug("Server/Router::listener, request end");
         const controller = new IndexController();
@@ -64,20 +69,24 @@ export class Router {
         response.end();
       });
     }
-
   }
 
   private async routeAPI(route: string): Promise<IBaseController> {
     const className = this.getControllerClassName(route);
-    debug("Server/Router::route, Controller-Class found: ", className, 'for route', route);
+    debug(
+      "Server/Router::route, Controller-Class found: ",
+      className,
+      "for route",
+      route
+    );
     const { default: Controller } = await import("../Controller/" + className);
     return new Controller(this.app);
   }
 
   public getControllerClassName(route: string) {
     const routings = {
-      "exercise": "ExerciseController", // get all exercises
-      "plan": "PlanController", // create new Plan
+      exercise: "ExerciseController", // get all exercises
+      plan: "PlanController", // create new Plan
     };
     if (routings[route]) {
       return routings[route];
@@ -85,8 +94,7 @@ export class Router {
     return "NotFoundController";
   }
 
-  private getMethod(reqMethod, params: string[]): string 
-  {
+  private getMethod(reqMethod, params: string[]): string {
     if (reqMethod === "GET") {
       if (params.length === 0) {
         return "handleGetAll";
