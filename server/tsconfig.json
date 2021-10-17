@@ -9,4 +9,7 @@
         "esModuleInterop": true,
         "skipLibCheck": true
     },
+    "watchOptions": {
+        "excludeDirectories": ["client","build","node_modules","migrations"]
+    }
 }
