@@ -21,4 +21,5 @@ services:
             - ./client/public:/app/public
             - ./client/dist:/app/dist
             - node_modules_client:/app/node_modules
-        
+        environment:
+            - CHOKIDAR_USEPOLLING=true
