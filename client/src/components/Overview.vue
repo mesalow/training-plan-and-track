@@ -1,15 +1,25 @@
 <template>
   <div class="overview">
-    <h1>{{ msg }}</h1>
+    <div @click="goToCreatePlan">Create a new plan</div>
+    <div>Continue current plan</div>
+    <div>Show plan details</div>
   </div>
 </template>
 
 <script lang="ts">
+import { useState, State } from "../store/state";
+
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String,
-  },
+  name: "Overview",
+  props: {},
+  setup(props) {
+    const state = useState() as State;
+    const goToCreatePlan = () => {
+      console.log("goto");
+      state.currentDisplay = 'createPlan'
+    };
+    return { goToCreatePlan };
+  }
 };
 </script>
 
