@@ -34,6 +34,9 @@ export class Router {
       request.on("end", async () => {
         debug("Server/Router::listener, request end");
         const responseBody = await controller[methodName](params, requestBody);
+        response.writeHead(200, {
+          'Content-Type': 'application/json'
+        });
         response.write(responseBody);
         response.end();
       });
