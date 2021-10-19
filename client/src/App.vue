@@ -1,29 +1,31 @@
 <template>
-<div>
-  <Overview v-if="state.currentDisplay === 'overview'" />
-  <div v-else-if="state.currentDisplay !== 'overview'" @click="backToOverview">Back to overview</div>
-  <CreatePlan v-if="state.currentDisplay === 'createPlan'" />
+  <div>
+    <Overview v-if="state.currentDisplay === 'overview'" />
+    <div v-else-if="state.currentDisplay !== 'overview'" @click="backToOverview">
+      Back to overview
+    </div>
+    <CreatePlan v-if="state.currentDisplay === 'createPlan'" />
   </div>
 </template>
 
 <script lang="ts">
-import Overview from "./components/Overview.vue";
-import CreatePlan from "./components/CreatePlan.vue";
-import { ref } from "vue";
-import { useState } from "./store/state";
-import { State } from './store/state';
+import Overview from './components/Overview.vue';
+import CreatePlan from './components/CreatePlan.vue';
+import { useState, State } from './store/state';
+
 export default {
-  name: "App",
+  name: 'App',
   components: {
-    Overview, CreatePlan
+    Overview,
+    CreatePlan,
   },
-  setup(props, context) {
+  setup() {
     const state = useState() as State;
     const backToOverview = () => {
       state.currentDisplay = 'overview';
-    }
+    };
     return { state, backToOverview };
-  }
+  },
 };
 </script>
 

@@ -7,19 +7,19 @@
 </template>
 
 <script lang="ts">
-import { useState, State } from "../store/state";
+import { useState, State } from '../store/state';
 
 export default {
-  name: "Overview",
+  name: 'Overview',
   props: {},
-  setup(props) {
+  setup() {
     const state = useState() as State;
     const goToCreatePlan = () => {
-      console.log("goto");
-      state.currentDisplay = 'createPlan'
+      console.log('goto');
+      state.currentDisplay = 'createPlan';
     };
     return { goToCreatePlan };
-  }
+  },
 };
 </script>
 
