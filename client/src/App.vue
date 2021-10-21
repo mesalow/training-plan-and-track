@@ -1,10 +1,12 @@
 <template>
   <div>
-    <Overview v-if="state.currentDisplay === 'overview'" />
-    <div v-else-if="state.currentDisplay !== 'overview'" @click="backToOverview">
-      Back to overview
-    </div>
     <CreatePlan v-if="state.currentDisplay === 'createPlan'" />
+    <div>
+      <Overview v-if="state.currentDisplay === 'overview'" />
+      <div v-else-if="state.currentDisplay !== 'overview'" @click="backToOverview">
+        Back to overview
+      </div>
+    </div>
   </div>
 </template>
 
