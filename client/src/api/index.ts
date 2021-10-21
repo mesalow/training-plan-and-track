@@ -9,14 +9,16 @@ const sendRequest = async (
   body = null,
 ) => {
   console.log(`sendRequest: ${route}`);
+  let data: unknown;
   switch (method.toUpperCase()) {
     case 'GET':
       console.log('GET');
-      const { data } = await axios.get(baseRoute + route, options);
-      return data;
+      ({ data } = await axios.get(baseRoute + route, options));
+      break;
     default:
       throw new Error(`not implemented method: ${method}`);
   }
+  return data;
 };
 
 export const getAllExercises = async () => sendRequest('exercise');
