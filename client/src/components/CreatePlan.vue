@@ -3,9 +3,10 @@
     <div v-if="isLoading">Loading...</div>
     <div v-else>
       Test
-      <div v-for="(exerciseName, k) in state.exerciseList" :key="k">
-        {{ exerciseName }}
-      </div>
+      <jn-t-day-input :name="'Saturday'"></jn-t-day-input>
+      <jn-t-day-input :name="'Monday'"></jn-t-day-input>
+      <jn-t-day-input :name="'Wednesday'"></jn-t-day-input>
+      <jn-t-day-input :name="'Friday'"></jn-t-day-input>
     </div>
   </div>
 </template>
@@ -14,9 +15,13 @@
 import { onBeforeMount, ref } from 'vue';
 import { useState, State } from '../store/state';
 import { getAllExercises } from '../api';
+import JnTDayInput from './JnTDayInput.vue';
 
 export default {
   name: 'createPlan',
+  components: {
+    JnTDayInput,
+  },
   props: {},
   setup() {
     const isLoading = ref(false);
@@ -27,14 +32,15 @@ export default {
     onBeforeMount(async () => {
       try {
         const data = await getAllExercises();
-      isLoading.value = false;
+        isLoading.value = false;
         state.exerciseList = Object.keys(data);
       } catch (error) {
         console.error(error);
       }
     });
     return {
-      isLoading, state,
+      isLoading,
+      state,
     };
   },
 };
