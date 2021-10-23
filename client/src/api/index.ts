@@ -9,7 +9,7 @@ const sendRequest = async (
   body = null,
 ) => {
   console.log(`sendRequest: ${route}`);
-  let data: unknown;
+  let data: object;
   switch (method.toUpperCase()) {
     case 'GET':
       console.log('GET');
