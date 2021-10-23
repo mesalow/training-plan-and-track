@@ -3,20 +3,21 @@
     <div>{{ name }}</div>
     <div @click="toggle">Expand</div>
     <div v-show="expanded">
-      <div>T1</div>
-      <div>T2a</div>
-      <div>T2b</div>
-      <div>T2c</div>
-      <div>T3</div>
-      <div>T3</div>
-      <div>T3</div>
-      <div>T3</div>
+      <exercise-input :progressionType="'T1'" />
+      <exercise-input :progressionType="'T2a'" />
+      <exercise-input :progressionType="'T2b'" />
+      <exercise-input :progressionType="'T2c'" />
+      <exercise-input :progressionType="'T3'" />
+      <exercise-input :progressionType="'T3'" />
+      <exercise-input :progressionType="'T3'" />
+      <exercise-input :progressionType="'T3'" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { ref } from 'vue';
+import ExerciseInput from './ExerciseInput.vue';
 
 export default {
   props: {
@@ -24,6 +25,9 @@ export default {
       type: String,
       required: true,
     },
+  },
+  components: {
+    ExerciseInput,
   },
   setup() {
     const expanded = ref(false);

@@ -2,7 +2,6 @@
   <div>
     <div v-if="isLoading">Loading...</div>
     <div v-else>
-      Test
       <jn-t-day-input :name="'Saturday'"></jn-t-day-input>
       <jn-t-day-input :name="'Monday'"></jn-t-day-input>
       <jn-t-day-input :name="'Wednesday'"></jn-t-day-input>
