@@ -18,7 +18,7 @@ export class PlanRepository {
   }
 
   async add(programId: number, startDay: string): Promise<number> {
-    debug("PlanRepository::add, programId %n, startDay %s", programId, startDay);
+    debug("PlanRepository::add, programId %d, startDay %s", programId, startDay);
     const programRow = await this.db.get(
       `SELECT prg_name
      FROM program
@@ -48,6 +48,7 @@ export class PlanRepository {
   }
 
   async addDay(planId: number, dayNumber: number): Promise<number> {
+    debug("PlanRepository::addDay, planId %d, dayNumber %s", planId, dayNumber);
     await this.db.run(`
     INSERT INTO planned_day ('pl_pl_id', 'day_number') VALUES('${planId}', '${dayNumber}');
     `);
@@ -66,6 +67,7 @@ export class PlanRepository {
     plannedDayId: number,
     exercise: ExerciseDTO
   ): Promise<void> {
+    debug("PlanRepository::addExercise, plannedDayId %d, exercise %o", plannedDayId, exercise);
     const { ex_id: exerciseId} = await this.db.get(
       `SELECT ex_id
        FROM exercise
