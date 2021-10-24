@@ -2,10 +2,12 @@
   <div>
     <div v-if="isLoading">Loading...</div>
     <div v-else>
-      <jn-t-day-input :name="'Saturday'"></jn-t-day-input>
-      <jn-t-day-input :name="'Monday'"></jn-t-day-input>
-      <jn-t-day-input :name="'Wednesday'"></jn-t-day-input>
-      <jn-t-day-input :name="'Friday'"></jn-t-day-input>
+      <jn-t-day-input
+        v-for="(plannedDay, idx) in state.plannedDays.days"
+        :key="idx"
+        :name="plannedDay.weekDay"
+        :exercises="plannedDay.exercises"
+      ></jn-t-day-input>
     </div>
   </div>
 </template>

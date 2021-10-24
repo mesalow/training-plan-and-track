@@ -3,14 +3,15 @@
     <div>{{ name }}</div>
     <div @click="toggle">Expand</div>
     <div v-show="expanded">
-      <exercise-input :progressionType="'T1'" />
-      <exercise-input :progressionType="'T2a'" />
-      <exercise-input :progressionType="'T2b'" />
-      <exercise-input :progressionType="'T2c'" />
-      <exercise-input :progressionType="'T3'" />
-      <exercise-input :progressionType="'T3'" />
-      <exercise-input :progressionType="'T3'" />
-      <exercise-input :progressionType="'T3'" />
+      <exercise-input
+        v-for="(exercise, idx) in exercises"
+        :key="idx"
+        :progressionType="exercise.progressionType"
+        :name="exercise.name"
+        :tm="exercise.tm"
+        :exNumber="idx"
+        :weekDay="name"
+      />
     </div>
   </div>
 </template>
@@ -25,11 +26,16 @@ export default {
       type: String,
       required: true,
     },
+    exercises: {
+      type: Array,
+      required: true,
+    },
   },
   components: {
     ExerciseInput,
   },
-  setup() {
+  setup(props: any) {
+    console.log('jntdayInput, exercises: %o', props.exercises);
     const expanded = ref(false);
     const toggle = () => {
       expanded.value = !expanded.value;
