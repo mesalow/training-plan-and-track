@@ -1,8 +1,8 @@
 <template>
   <div class="overview">
-    <div @click="goToCreatePlan">Create a new plan</div>
+    <div @click="state.currentDisplay = 'createPlan'">Create a new plan</div>
     <div>Continue current plan</div>
-    <div>Show plan details</div>
+    <div @click="state.currentDisplay = 'showPlans'">Show plan details</div>
   </div>
 </template>
 
@@ -14,11 +14,7 @@ export default {
   props: {},
   setup() {
     const state = useState() as RootState;
-    const goToCreatePlan = () => {
-      console.log('goto');
-      state.currentDisplay = 'createPlan';
-    };
-    return { goToCreatePlan };
+    return { state };
   },
 };
 </script>
