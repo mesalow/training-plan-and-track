@@ -43,9 +43,9 @@ export default class PlanController implements IBaseController {
    */
   /**
    * getAll should give us back all plans we ever did
-   * @param params 
-   * @param requestBody 
-   * @returns 
+   * @param params
+   * @param requestBody
+   * @returns
    */
   async handleGetAll(params, requestBody) {
     try {
@@ -59,9 +59,9 @@ export default class PlanController implements IBaseController {
   /**
    * specific get with /plan/{planId}/{weekNumber}/{dayNumber} -> all exercises for this day
    * the bare planned exercises are not useful - we need to complement them with the calculated weights and sets from the program
-   * @param params 
-   * @param requestBody 
-   * @returns 
+   * @param params
+   * @param requestBody
+   * @returns
    */
   async handleGet(params, requestBody) {
     debug("Controller/PlanController::handleGet: params: %o", params);
@@ -73,11 +73,21 @@ export default class PlanController implements IBaseController {
       const weekNumber = params[1];
       const dayNumber = params[2];
       const planRepository = this.app.repositoryManager.getPlanRepo();
-      const result = await planRepository.getPlannedExercises(planId, dayNumber);
+      const result = await planRepository.getPlannedExercises(
+        planId,
+        dayNumber
+      );
       const trainingModel = new JackednTan2();
       const prescribedExercises = result.map((exercise) => {
-        return {name: exercise.name, sets: trainingModel.getExpectedSets(weekNumber,exercise.progression, exercise.tm)}
-      })
+        return {
+          name: exercise.name,
+          sets: trainingModel.getExpectedSets(
+            weekNumber,
+            exercise.progression,
+            exercise.tm
+          ),
+        };
+      });
       return JSON.stringify(prescribedExercises);
     } catch (error) {
       console.error(error);
@@ -86,7 +96,10 @@ export default class PlanController implements IBaseController {
   }
 
   async handlePost(params, requestBody) {
-    debug("Controller/PlanController::handlePost: requestBody: %o", requestBody);
+    debug(
+      "Controller/PlanController::handlePost: requestBody: %o",
+      requestBody
+    );
     try {
       const json = JSON.parse(requestBody);
 
@@ -104,7 +117,9 @@ export default class PlanController implements IBaseController {
       for (const plannedDay of plannedDays) {
         const dayId = await planRepository.addDay(planId, plannedDay.day);
         for (const plannedExercise of plannedDay.exercises) {
-          await planRepository.addExercise(dayId, plannedExercise);
+          if (plannedExercise.name && plannedExercise.progression) {
+            await planRepository.addExercise(dayId, plannedExercise);
+          }
         }
       }
       // application need to do the following things
