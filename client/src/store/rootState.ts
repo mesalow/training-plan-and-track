@@ -8,7 +8,7 @@ export interface RootState {
   currentDisplay: string;
 }
 
-export const stateSymbol = Symbol('state');
+export const stateSymbol = Symbol('rootstate');
 export const createState = () => reactive({
   currentDisplay: 'overview',
 });

@@ -59,7 +59,7 @@ const setExercise = (
   }
   console.log('state.setExercise new state: %o', plannedDays);
 };
-export const stateSymbol = Symbol('state');
+export const stateSymbol = Symbol('createplanstate');
 export const createState = () => reactive({
   exerciseList: [],
   plannedDays,
