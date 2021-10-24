@@ -28,7 +28,6 @@ export default {
   setup() {
     const isLoading = ref(false);
     const state = useState() as State;
-    console.log('createPlan', state.currentDisplay);
     console.log('createPlan %o', state.plannedDays);
     isLoading.value = true;
     const submit = async () => {

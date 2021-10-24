@@ -7,12 +7,14 @@
       </div>
     </div>
     <CreatePlan v-if="state.currentDisplay === 'createPlan'" />
+    <ShowPlans v-if="state.currentDisplay === 'showPlans'" />
   </div>
 </template>
 
 <script lang="ts">
 import Overview from './views/Overview/Overview.vue';
 import CreatePlan from './views/CreatePlan/CreatePlan.vue';
+import ShowPlans from './views/ShowPlans/ShowPlans.vue';
 import { useState, RootState } from './store/rootState';
 
 export default {
@@ -20,6 +22,7 @@ export default {
   components: {
     Overview,
     CreatePlan,
+    ShowPlans,
   },
   setup() {
     const state = useState() as RootState;
