@@ -15,6 +15,10 @@ const sendRequest = async (
       console.log('GET');
       ({ data } = await axios.get(baseRoute + route, options));
       break;
+    case 'POST':
+      console.log('POST');
+      ({ data } = await axios.post(baseRoute + route, body, options));
+      break;
     default:
       throw new Error(`not implemented method: ${method}`);
   }
@@ -22,4 +26,4 @@ const sendRequest = async (
 };
 
 export const getAllExercises = async () => sendRequest('exercise');
-export const getAllExercises2 = async () => sendRequest('exercise');
+export const createPlan = async (body: any) => sendRequest('plan', 'POST', undefined, body);
