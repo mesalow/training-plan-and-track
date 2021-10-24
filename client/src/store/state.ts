@@ -5,8 +5,8 @@ import {
 } from 'vue';
 
 interface plannedExercise {
-  exerciseName: string;
-  progressionType: string;
+  name: string;
+  progression: string;
   tm: number | null;
 }
 interface plannedDay {
@@ -30,19 +30,17 @@ const day = (dayNumber: number, weekDay: string): plannedDay => ({
   day: dayNumber,
   weekDay,
   exercises: [
-    { exerciseName: '', progressionType: 'T1', tm: null },
-    { exerciseName: '', progressionType: 'T2a', tm: null },
-    { exerciseName: '', progressionType: 'T2b', tm: null },
-    { exerciseName: '', progressionType: 'T2c', tm: null },
-    { exerciseName: '', progressionType: 'T3', tm: null },
-    { exerciseName: '', progressionType: 'T3', tm: null },
-    { exerciseName: '', progressionType: 'T3', tm: null },
-    { exerciseName: '', progressionType: 'T3', tm: null },
+    { name: '', progression: 'T1', tm: null },
+    { name: '', progression: 'T2a', tm: null },
+    { name: '', progression: 'T2b', tm: null },
+    { name: '', progression: 'T2c', tm: null },
+    { name: '', progression: 'T3', tm: null },
+    { name: '', progression: 'T3', tm: null },
+    { name: '', progression: 'T3', tm: null },
+    { name: '', progression: 'T3', tm: null },
   ],
 });
-const plannedDays = {
-  days: [day(1, 'Saturday'), day(2, 'Monday'), day(3, 'Wednesday'), day(4, 'Friday')],
-};
+const plannedDays = [day(1, 'Saturday'), day(2, 'Monday'), day(3, 'Wednesday'), day(4, 'Friday')];
 
 const setExercise = (
   weekDay: string,
@@ -51,12 +49,12 @@ const setExercise = (
   tm: number | null,
 ) => {
   console.log('state.setExercise called', weekDay, exerciseIndex, exerciseName, tm);
-  const d = plannedDays.days.find((pd) => pd.weekDay === weekDay);
+  const d = plannedDays.find((pd) => pd.weekDay === weekDay);
   if (!d) {
     throw new Error(`did not find planned day on ${weekDay}`);
   }
   const exercise = d.exercises[exerciseIndex];
-  exercise.exerciseName = exerciseName;
+  exercise.name = exerciseName;
   if (tm) {
     exercise.tm = tm;
   }

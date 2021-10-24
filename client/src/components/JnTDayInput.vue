@@ -6,7 +6,7 @@
       <exercise-input
         v-for="(exercise, idx) in exercises"
         :key="idx"
-        :progressionType="exercise.progressionType"
+        :progressionType="exercise.progression"
         :name="exercise.name"
         :tm="exercise.tm"
         :exNumber="idx"

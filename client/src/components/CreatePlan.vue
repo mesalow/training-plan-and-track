@@ -3,7 +3,7 @@
     <div v-if="isLoading">Loading...</div>
     <div v-else>
       <jn-t-day-input
-        v-for="(plannedDay, idx) in state.plannedDays.days"
+        v-for="(plannedDay, idx) in state.plannedDays"
         :key="idx"
         :name="plannedDay.weekDay"
         :exercises="plannedDay.exercises"
@@ -16,7 +16,7 @@
 <script lang="ts">
 import { onBeforeMount, ref } from 'vue';
 import { useState, State } from '../store/state';
-import { getAllExercises } from '../api';
+import { getAllExercises, createPlan } from '../api';
 import JnTDayInput from './JnTDayInput.vue';
 
 export default {
@@ -34,6 +34,12 @@ export default {
     const submit = async () => {
       try {
         console.log('submit');
+        const body = {
+          programId: 1,
+          startDay: new Date().toDateString(),
+          days: state.plannedDays,
+        };
+        await createPlan(body);
       } catch (error) {
         console.error('createPlan.submit', error);
       }
