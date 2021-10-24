@@ -15,8 +15,8 @@
 
 <script lang="ts">
 import { onBeforeMount, ref } from 'vue';
-import { useState, State } from '../store/state';
-import { getAllExercises, createPlan } from '../api';
+import { useState, State } from '../../store/state';
+import { getAllExercises, createPlan } from '../../api';
 import JnTDayInput from './JnTDayInput.vue';
 
 export default {

@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { useState, State } from '../store/state';
+import { useState, State } from '../../store/state';
 
 export default {
   name: 'Overview',

@@ -11,8 +11,8 @@
 </template>
 
 <script lang="ts">
-import Overview from './components/Overview.vue';
-import CreatePlan from './components/CreatePlan.vue';
+import Overview from './views/Overview/Overview.vue';
+import CreatePlan from './views/CreatePlan/CreatePlan.vue';
 import { useState, State } from './store/state';
 
 export default {
