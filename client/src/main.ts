@@ -1,7 +1,11 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import { stateSymbol, createState } from './store/createPlanState';
+import { stateSymbol as createStateSymbol, createState } from './store/createPlanState';
+import { stateSymbol as rootStateSymbol, createState as createRootState } from './store/rootState';
+import { stateSymbol as showPlanStateSymbol, createState as createShowPlanState } from './store/showPlanState';
 
 createApp(App)
-  .provide(stateSymbol, createState())
+  .provide(createStateSymbol, createState())
+  .provide(rootStateSymbol, createRootState())
+  .provide(showPlanStateSymbol, createShowPlanState())
   .mount('#app');
