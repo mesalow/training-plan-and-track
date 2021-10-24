@@ -15,7 +15,6 @@ interface plannedDay {
   exercises: plannedExercise[];
 }
 export interface State {
-  currentDisplay: string;
   exerciseList: string[];
   plannedDays: plannedDay[];
   setExercise: (
@@ -62,7 +61,6 @@ const setExercise = (
 };
 export const stateSymbol = Symbol('state');
 export const createState = () => reactive({
-  currentDisplay: 'overview',
   exerciseList: [],
   plannedDays,
   setExercise,

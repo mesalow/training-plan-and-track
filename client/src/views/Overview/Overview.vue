@@ -7,13 +7,13 @@
 </template>
 
 <script lang="ts">
-import { useState, State } from '../../store/state';
+import { useState, RootState } from '../../store/rootState';
 
 export default {
   name: 'Overview',
   props: {},
   setup() {
-    const state = useState() as State;
+    const state = useState() as RootState;
     const goToCreatePlan = () => {
       console.log('goto');
       state.currentDisplay = 'createPlan';

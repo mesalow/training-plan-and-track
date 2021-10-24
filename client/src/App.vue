@@ -13,7 +13,7 @@
 <script lang="ts">
 import Overview from './views/Overview/Overview.vue';
 import CreatePlan from './views/CreatePlan/CreatePlan.vue';
-import { useState, State } from './store/state';
+import { useState, RootState } from './store/rootState';
 
 export default {
   name: 'App',
@@ -22,7 +22,7 @@ export default {
     CreatePlan,
   },
   setup() {
-    const state = useState() as State;
+    const state = useState() as RootState;
     const backToOverview = () => {
       state.currentDisplay = 'overview';
     };
