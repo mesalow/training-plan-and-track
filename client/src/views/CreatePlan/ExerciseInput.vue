@@ -13,7 +13,7 @@
 </template>
 <script lang="ts">
 import { ref, watch } from 'vue';
-import { useState, State } from '../../store/state';
+import { useState, State } from '../../store/createPlanState';
 
 export default {
   props: {
