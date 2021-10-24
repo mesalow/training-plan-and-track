@@ -8,6 +8,7 @@
         :name="plannedDay.weekDay"
         :exercises="plannedDay.exercises"
       ></jn-t-day-input>
+      <div class="createplan-submit" @click="submit">Submit</div>
     </div>
   </div>
 </template>
@@ -27,22 +28,39 @@ export default {
   setup() {
     const isLoading = ref(false);
     const state = useState() as State;
-    console.log(state.currentDisplay);
+    console.log('createPlan', state.currentDisplay);
+    console.log('createPlan %o', state.plannedDays);
     isLoading.value = true;
-
+    const submit = async () => {
+      try {
+        console.log('submit');
+      } catch (error) {
+        console.error('createPlan.submit', error);
+      }
+    };
     onBeforeMount(async () => {
       try {
         const data = await getAllExercises();
         isLoading.value = false;
         state.exerciseList = Object.keys(data);
       } catch (error) {
-        console.error(error);
+        console.error('createPlan', error);
       }
     });
     return {
       isLoading,
       state,
+      submit,
     };
   },
 };
 </script>
+<style scoped>
+.createplan-submit {
+  background-color: black;
+  width:30%;
+  color: white;
+  left:35%;
+  position:absolute;
+}
+</style>
