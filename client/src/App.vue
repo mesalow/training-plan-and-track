@@ -8,6 +8,7 @@
     </div>
     <CreatePlan v-if="state.currentDisplay === 'createPlan'" />
     <ShowPlans v-if="state.currentDisplay === 'showPlans'" />
+    <PlanOverview v-if="state.currentDisplay === 'planOverview'" />
   </div>
 </template>
 
@@ -15,6 +16,7 @@
 import Overview from './views/Overview/Overview.vue';
 import CreatePlan from './views/CreatePlan/CreatePlan.vue';
 import ShowPlans from './views/ShowPlans/ShowPlans.vue';
+import PlanOverview from './views/PlanOverview/PlanOverview.vue';
 import { useState, RootState } from './store/rootState';
 
 export default {
@@ -23,6 +25,7 @@ export default {
     Overview,
     CreatePlan,
     ShowPlans,
+    PlanOverview,
   },
   setup() {
     const state = useState() as RootState;
