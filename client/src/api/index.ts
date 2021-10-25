@@ -27,4 +27,5 @@ const sendRequest = async (
 
 export const getAllExercises = async () => sendRequest('exercise');
 export const getAllPlans = async () => sendRequest('plan');
+export const getPlan = async (id: number) => sendRequest(`plan/${id}`);
 export const createPlan = async (body: any) => sendRequest('plan', 'POST', undefined, body);
