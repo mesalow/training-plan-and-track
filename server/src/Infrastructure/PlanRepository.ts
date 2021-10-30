@@ -100,7 +100,7 @@ export class PlanRepository {
   {
     debug(`PlanRepository::getPlannedExercises, planId ${planId}, dayNumber ${dayNumber}`);
     const resultSet = await this.db.all(`
-      SELECT ex_name, pt_description, tm
+      SELECT ex_name, pt_description, tm, ex_id
       FROM planned_exercise 
       JOIN planned_day on planned_day.pld_id = planned_exercise.pld_pld_id
       JOIN plan on plan.pl_id = planned_day.pl_pl_id
@@ -114,6 +114,7 @@ export class PlanRepository {
     return resultSet.map(row => {
       return {
         name: row.ex_name,
+        id: row.ex_id,
         progression: row.pt_description,
         tm: row.tm
       }
@@ -123,6 +124,7 @@ export class PlanRepository {
 
 export interface ExerciseDTO {
   name: string;
+  id: number,
   progression: string;
   tm: number | null;
 }
