@@ -1,4 +1,4 @@
-import { JackednTan2 } from "./Program/JackednTan2";
+import { ExpectedSet, JackednTan2 } from "./Program/JackednTan2";
 
 import { domainDebug as debug } from "../Helpers/debuggers";
 import { ExerciseDTO } from "../Infrastructure/PlanRepository";
@@ -9,13 +9,39 @@ interface PlannedDayDTO {
     exercises: ExerciseDTO[],
 }
 
-export const getProgress = (completePlan: PlannedDayDTO[], allActualSets: ActualSetDTO[]) => {
+interface ActualDay {
+    dayNumber: number;
+    exercises: ActualExercise[];
+  }
+  
+  interface ActualExercise {
+    name: string;
+    progression: progression;
+    tm: number | null;
+    id: number;
+    sets: MaybeDoneSet[];
+  }
+  type progression = "T1" | "T2a" | "T2b" | "T3";
+  type MaybeDoneSet = NotDoneYetSet | ActualSet;
+  
+  interface NotDoneYetSet {
+    weight: null;
+    reps: null;
+    expected: ExpectedSet;
+  }
+  
+  export interface ActualSet {
+    weight: number;
+    reps: number;
+    expected: ExpectedSet;
+  }
+export const getProgress = (completePlan: PlannedDayDTO[], allActualSets: ActualSetDTO[]): { weekNumber: number, days: ActualDay[] }[] => {
   const trainingModel = new JackednTan2();
   const weeks = [1, 2, 3, 4, 5, 6];
   return weeks.map((weekNumber) => {
     const weekExercises = completePlan.map((day) => {
       const { dayNumber, exercises } = day;
-      const expectedSets = exercises.map((ex) => {
+      const expectedSetsForDay = exercises.map((ex) => {
         const actualSetsForExercise = allActualSets.filter((actualSet) => {
           return (
             actualSet.week === weekNumber &&
@@ -29,7 +55,7 @@ export const getProgress = (completePlan: PlannedDayDTO[], allActualSets: Actual
         );
         const expectedSets = trainingModel.getExpectedSets(
           weekNumber,
-          ex.progression,
+          ex.progression as progression,
           ex.tm
         );
         const sets = expectedSets.map((expectedSet, idx) => {
@@ -53,7 +79,7 @@ export const getProgress = (completePlan: PlannedDayDTO[], allActualSets: Actual
       });
       return {
         dayNumber,
-        exercises: expectedSets,
+        exercises: expectedSetsForDay as ActualExercise[],
       };
     });
     return {
