@@ -90,6 +90,7 @@ export class Router {
     const routings = {
       exercise: "ExerciseController", // get all exercises
       plan: "PlanController", // create new Plan
+      training: "TrainingController", // get training progress
     };
     if (routings[route]) {
       return routings[route];
