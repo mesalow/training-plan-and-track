@@ -37,7 +37,6 @@ export default class TrainingController implements IBaseController {
     const allActualSets = await trainingRepo.getAllInPlan(planId);
     const result = getProgress(completePlan, allActualSets);
     debug("TrainingController: result %o", result[0].days[0].exercises[0].sets);
-    const responseBody = { data: result };
     /**
      * how should it look?
      * [{week: 1,
@@ -52,7 +51,7 @@ export default class TrainingController implements IBaseController {
      *   ]
      * }]
      */
-    return JSON.stringify(responseBody);
+    return JSON.stringify(result);
   }
   /**
    * saves array of actual sets, idempotent, returns new overview of plan
