@@ -29,3 +29,4 @@ export const getAllExercises = async () => sendRequest('exercise');
 export const getAllPlans = async () => sendRequest('plan');
 export const getProgress = async (id: number) => sendRequest(`training/${id}`);
 export const createPlan = async (body: any) => sendRequest('plan', 'POST', undefined, body);
+export const saveActualSet = async (body: any) => sendRequest('training', 'POST', undefined, body);
