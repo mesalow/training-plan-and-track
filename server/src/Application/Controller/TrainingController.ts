@@ -60,12 +60,29 @@ export default class TrainingController implements IBaseController {
    * @returns
    */
   async handlePost(params, requestBody) {
-    if (params.length !== 1) {
+    try {
+      if (params.length !== 1) {
+        debug('TrainingController::handlePost, incorrect number of params %o', params);
+        return "NOT OK";
+      }
+      debug('TrainingController::handlePost, body: %o', requestBody);
+      const { exerciseName, weekNumber, dayNumber, setNumber, weight, reps } =
+        requestBody;
+      const trainingRepo = this.app.repositoryManager.getTrainingRepo();
+      await trainingRepo.addActualSet(
+        params[0],
+        exerciseName,
+        weekNumber,
+        dayNumber,
+        setNumber,
+        weight,
+        reps
+      );
+      debug('TrainingController::handlePost, save successful');
+      return "OK";
+    } catch (error) {
+      debug('TrainingController::handlePost, error: %o', error);
       return "NOT OK";
     }
-    const { exerciseName, weekNumber, dayNumber,  setNumber, weight, reps } = requestBody;
-    const trainingRepo = this.app.repositoryManager.getTrainingRepo();
-    trainingRepo.addActualSet(params[0], exerciseName, weekNumber, dayNumber, setNumber, weight, reps);
-    return "NOT IMPLEMENTED";
   }
 }
