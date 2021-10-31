@@ -9,7 +9,16 @@
           {{ exercise.name }}<br />
           <div v-for="(set, idx) in exercise.sets" :key="idx">
             <done-set v-if="set.weight" :weight="set.weight" :reps="set.reps"></done-set>
-            <set-input v-else :expectedSet="set.expected"></set-input>
+            <set-input
+              v-else
+              :exerciseName="exercise.name"
+              :planId="state.currentPlanId"
+              :weekNumber="week.weekNumber"
+              :dayNumber="day.dayNumber"
+              :setNumber="idx + 1"
+              :expectedSet="set.expected"
+              @save="load"
+            ></set-input>
           </div>
         </div>
       </div>
@@ -31,7 +40,7 @@ export default {
   },
   setup() {
     const state = useState() as ShowPlanState;
-    onBeforeMount(async () => {
+    const load = async () => {
       try {
         const response = await getProgress(state.currentPlanId);
         console.log('loaded current plan %o', response);
@@ -41,8 +50,9 @@ export default {
       } catch (error) {
         console.error('showPlans.beforeMount error', error);
       }
-    });
-    return { state };
+    };
+    onBeforeMount(load);
+    return { state, load };
   },
 };
 </script>

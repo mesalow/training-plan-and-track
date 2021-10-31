@@ -1,17 +1,61 @@
 <template>
-  <div>Not done! Expected weight: {{ expectedSet.weight }} Reps: {{ expectedSet.reps }}
-      <label>Weight:<input type="text"></label>
-      <label>Reps:<input type="text"></label>
-      <div>Submit</div>
+  <div>
+    Not done! Expected weight: {{ expectedSet.weight }} Reps: {{ expectedSet.reps }}
+    <label>Weight:<input v-model="setInput.weight" type="text"/></label>
+    <label>Reps:<input v-model="setInput.reps" type="text"/></label>
+    <div @click="submit">Submit</div>
   </div>
 </template>
 <script lang="ts">
+import { reactive } from 'vue';
+import { saveActualSet } from '../../api';
+
 export default {
   props: {
     expectedSet: {
       type: Object,
       required: true,
     },
+    exerciseName: {
+      type: String,
+      required: true,
+    },
+    planId: {
+      type: Number,
+      required: true,
+    },
+    weekNumber: {
+      type: Number,
+      required: true,
+    },
+    dayNumber: {
+      type: Number,
+      required: true,
+    },
+    setNumber: {
+      type: Number,
+      required: true,
+    },
+  },
+  setup(props, context) {
+    const setInput = reactive({
+      weight: props.expectedSet.weight,
+      reps: props.expectedSet.reps,
+    });
+    const submit = async () => {
+      console.log('submit', setInput.weight, setInput.reps);
+      const body = {
+        exerciseName: props.exerciseName,
+        weekNumber: props.weekNumber,
+        dayNumber: props.dayNumber,
+        setNumber: props.setNumber,
+        weight: setInput.weight,
+        reps: setInput.reps,
+      };
+      await saveActualSet(props.planId, body);
+      context.emit('save');
+    };
+    return { submit, setInput };
   },
 };
 </script>

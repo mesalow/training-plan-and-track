@@ -6,7 +6,7 @@ const sendRequest = async (
   route: string,
   method: string = 'GET',
   options: AxiosRequestConfig<any> | undefined = undefined,
-  body = null,
+  body: unknown = null,
 ) => {
   console.log(`sendRequest: ${route}`);
   let data: object;
@@ -25,8 +25,16 @@ const sendRequest = async (
   return data;
 };
 
+export interface ActualSetData {
+  exerciseName: string;
+  weekNumber: number;
+  dayNumber: number;
+  setNumber: number;
+  weight: number;
+  reps: number;
+}
 export const getAllExercises = async () => sendRequest('exercise');
 export const getAllPlans = async () => sendRequest('plan');
 export const getProgress = async (id: number) => sendRequest(`training/${id}`);
 export const createPlan = async (body: any) => sendRequest('plan', 'POST', undefined, body);
-export const saveActualSet = async (body: any) => sendRequest('training', 'POST', undefined, body);
+export const saveActualSet = async (id: number, body: ActualSetData) => sendRequest(`training/${id}`, 'POST', undefined, body);
