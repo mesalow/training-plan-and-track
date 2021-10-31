@@ -33,9 +33,16 @@ export class Router {
       });
       request.on("end", async () => {
         debug("Server/Router::listener, request end");
-        const responseBody = await controller[methodName](params, requestBody);
+        let requestAsJson = {};
+        if (requestBody.length > 0) {
+          requestAsJson = JSON.parse(requestBody);
+        }
+        const responseBody = await controller[methodName](
+          params,
+          requestAsJson
+        );
         response.writeHead(200, {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         });
         response.write(responseBody);
         response.end();
@@ -50,11 +57,13 @@ export class Router {
         const controller = new FileController();
         const fileName = rest[rest.length - 1];
         const fileType = fileName.split(".")[1];
-        if (['js','css','html'].includes(fileType)) {
+        if (["js", "css", "html"].includes(fileType)) {
           const responseBody = await controller.handleTextFile(rest.join("/"));
           response.write(responseBody);
         } else {
-          const responseBody = await controller.handleBinaryFile(rest.join("/"));
+          const responseBody = await controller.handleBinaryFile(
+            rest.join("/")
+          );
           response.write(responseBody);
         }
         response.end();

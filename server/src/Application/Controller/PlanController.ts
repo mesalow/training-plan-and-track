@@ -101,16 +101,14 @@ export default class PlanController implements IBaseController {
       requestBody
     );
     try {
-      const json = JSON.parse(requestBody);
-
       const validator = new Validator([]);
-      if (!validator.validate(json)) {
+      if (!validator.validate(requestBody)) {
         console.error(JSON.stringify(validator.getErrors()));
         return "NOT OK";
       }
-      const programId = json.programId;
-      const startDay = json.startDay;
-      const plannedDays = json.days;
+      const programId = requestBody.programId;
+      const startDay = requestBody.startDay;
+      const plannedDays = requestBody.days;
       const planRepository = this.app.repositoryManager.getPlanRepo();
 
       const planId = await planRepository.add(programId, startDay);
