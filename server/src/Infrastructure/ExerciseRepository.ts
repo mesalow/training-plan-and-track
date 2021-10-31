@@ -26,4 +26,15 @@ export class ExerciseRepository {
     debug('ExerciseRepository::getAll, result %o', results);
     return results;
   }
+  
+  async getIdByName(exerciseName) {
+    const { ex_id: exerciseId} = await this.db.get(
+      `SELECT ex_id
+       FROM exercise
+       WHERE ex_name = ?
+      `,
+      [exerciseName]
+    );
+    return exerciseId;
+  }
 }

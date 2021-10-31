@@ -1,5 +1,6 @@
 import { Database } from "sqlite";
 import { infraStructureDebug as debug } from "../Helpers/debuggers";
+import { ExerciseRepository } from "./ExerciseRepository";
 
 export class PlanRepository {
   private db: Database;
@@ -68,13 +69,8 @@ export class PlanRepository {
     exercise: ExerciseDTO
   ): Promise<void> {
     debug("PlanRepository::addExercise, plannedDayId %d, exercise %o", plannedDayId, exercise);
-    const { ex_id: exerciseId} = await this.db.get(
-      `SELECT ex_id
-       FROM exercise
-       WHERE ex_name = ?
-      `,
-      [exercise.name]
-    );
+    const exerciseRepository = new ExerciseRepository(this.db);
+    const exerciseId = exerciseRepository.getIdByName(exercise.name);
     if (!exerciseId) {
       throw new Error(`exercise with name ${exercise.name} not found`);
     }
