@@ -31,8 +31,11 @@ export class TrainingRepository {
     weight,
     reps
   ) {
+    debug(
+      `TrainingRepository::addActualSet, planID: ${planId}, exerciseName: ${exerciseName}, weekNumber: ${weekNumber}, dayNumber: ${dayNumber}, setNumber: ${setNumber}, weight: ${weight}, reps: ${reps}`
+    );
     const exerciseRepository = new ExerciseRepository(this.db);
-    const exerciseId = exerciseRepository.getIdByName(exerciseName);
+    const exerciseId = await exerciseRepository.getIdByName(exerciseName);
     if (!exerciseId) {
       throw new Error(`exercise with name ${exerciseName} not found`);
     }
