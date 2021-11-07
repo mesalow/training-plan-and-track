@@ -36,7 +36,7 @@ export default class TrainingController implements IBaseController {
     const trainingRepo = this.app.repositoryManager.getTrainingRepo();
     const allActualSets = await trainingRepo.getAllInPlan(planId);
     const result = getProgress(completePlan, allActualSets);
-    debug("TrainingController: result %o", result[0].days[0].exercises[0].sets);
+    debug("TrainingController: result %o", result[0].days[0]?.exercises[0]?.sets);
     /**
      * how should it look?
      * [{week: 1,
