@@ -55,6 +55,8 @@ INSERT INTO exercise ('ex_name') VALUES ('Diamond push ups');
 --Shoulders
 INSERT INTO exercise ('ex_name') VALUES ('BB Press');
 INSERT INTO exercise ('ex_name') VALUES ('DB Press');
+INSERT INTO exercise ('ex_name') VALUES ('Seated BB Press');
+INSERT INTO exercise ('ex_name') VALUES ('Seated DB Press');
 INSERT INTO exercise ('ex_name') VALUES ('Push Press');
 INSERT INTO exercise ('ex_name') VALUES ('Arnold Press');
 INSERT INTO exercise ('ex_name') VALUES ('Lateral Raise');

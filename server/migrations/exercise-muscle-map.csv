@@ -1,33 +1,33 @@
 Exercise;Muscle
 High Bar Squat;Quad
 High Bar Squat;Glute
-Low Bar Squat;Leg Bicep
+Low Bar Squat;Leg Biceps
 Low Bar Squat;Glute
 Front Squat;Quad
 Bulgarian Split Squat;Glute
 Sissy Squat;Quad
 Hack Squat;Quad
 Deadlift;Glute
-Deadlift;Leg Bicep
+Deadlift;Leg Biceps
 Sumo Deadlift;Glute
 Sumo Squat;Glute
 Deficit Deadlift 1 inch;Glute
-Deficit Deadlift 1 inch;Leg Bicep
+Deficit Deadlift 1 inch;Leg Biceps
 Deficit Deadlift 2 inch;Glute
-Deficit Deadlift 2 inch;Leg Bicep
+Deficit Deadlift 2 inch;Leg Biceps
 Deficit Sumo Deadlift 1 inch;Glute
-Deficit Sumo Deadlift 1 inch;Leg Bicep
+Deficit Sumo Deadlift 1 inch;Leg Biceps
 Deficit Sumo Deadlift 2 inch;Glute
-Deficit Sumo Deadlift 2 inch;Leg Bicep
-Romanian Deadlift;Leg Bicep
-Stiff-legged Deadlift;Leg Bicep
+Deficit Sumo Deadlift 2 inch;Leg Biceps
+Romanian Deadlift;Leg Biceps
+Stiff-legged Deadlift;Leg Biceps
 Snatch-grip Deadlift;Glute
-Snatch-grip Deadlift;Leg Bicep
+Snatch-grip Deadlift;Leg Biceps
 Glute Bridge;Glute
 Single-leg Glute Bridge;Glute
 Hip thrust;Glute
-Nordic curls;Leg Bicep
-Towel leg curls;Leg Bicep
+Nordic curls;Leg Biceps
+Towel leg curls;Leg Biceps
 Standing calf raise;Calf
 Standing single leg calf raise;Calf
 Seated calf raise;Calf
@@ -67,6 +67,10 @@ BB Press;Front Delt
 BB Press;Side Delt
 DB Press;Front Delt
 DB Press;Side Delt
+Seated BB Press;Front Delt
+Seated BB Press;Side Delt
+Seated DB Press;Front Delt
+Seated DB Press;Side Delt
 Push Press;Front Delt
 Push Press;Side Delt
 Push Press;Triceps
@@ -77,14 +81,14 @@ Seated Lateral Raise;Side Delt
 Front Raise;Front Delt
 BB Upright Row;Side Delt
 DB Upright Row;Side Delt
-BB Curls;Bicep
-BB Close Grip Curls;Bicep
-BB Wide Grip Curls;Bicep
-DB Curls;Bicep
-Hammer Curls;Bicep
-DB Preacher Curls;Bicep
-DB Wall Curls;Bicep
-DB Incline Curls;Bicep
+BB Curls;Biceps
+BB Close Grip Curls;Biceps
+BB Wide Grip Curls;Biceps
+DB Curls;Biceps
+Hammer Curls;Biceps
+DB Preacher Curls;Biceps
+DB Wall Curls;Biceps
+DB Incline Curls;Biceps
 BB Skullcrushers;Triceps
 BB Skullcrushers Incline 30°;Triceps
 BB Skullcrushers Incline 60°;Triceps
