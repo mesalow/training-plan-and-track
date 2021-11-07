@@ -49,7 +49,7 @@ function T2a(weekNumber, tm): ExpectedSet[] {
     return [];
   }
   const repTable = [10, 8, 6, 4, 2];
-  const progressionTable = [0.6, 0.65, 0.7, 0.75, 0.8];
+  const progressionTable = [0.65, 0.7, 0.75, 0.8, 0.85];
   const numberOfSets = weekNumber === 5 ? 7 : weekNumber === 4 ? 5 : 4;
   const weight = progressionTable[weekNumber - 1] * tm;
   const reps = repTable[weekNumber - 1];
@@ -61,8 +61,8 @@ function T2b(weekNumber, tm): ExpectedSet[] {
   }
   const repTable = [15, 12, 10, 8, 6];
   const weight = "Set1";
-  const reps = repTable[weekNumber];
-  return times({ weight, reps }, 4);
+  const reps = repTable[weekNumber - 1];
+  return [{ weight, reps }, ...times({ weight, reps: "MR" } as ExpectedSet, 3)];
 }
 
 function T3(weekNumber, tm) {
