@@ -70,7 +70,7 @@ export class PlanRepository {
   ): Promise<void> {
     debug("PlanRepository::addExercise, plannedDayId %d, exercise %o", plannedDayId, exercise);
     const exerciseRepository = new ExerciseRepository(this.db);
-    const exerciseId = exerciseRepository.getIdByName(exercise.name);
+    const exerciseId = await exerciseRepository.getIdByName(exercise.name);
     if (!exerciseId) {
       throw new Error(`exercise with name ${exercise.name} not found`);
     }
