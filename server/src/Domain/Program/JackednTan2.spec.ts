@@ -28,19 +28,19 @@ describe('JackednTan2', () => {
         it('should calculate T2a, first week', () => {
             const jacked = new JackednTan2();
             const actual = jacked.getExpectedSets(1, 'T2a', 100);
-            const expected: ExpectedSet[] = [{weight:60,reps:10},{weight:60,reps:10},{weight:60,reps:10},{weight:60,reps:10}]
+            const expected: ExpectedSet[] = [{weight:65,reps:10},{weight:65,reps:10},{weight:65,reps:10},{weight:65,reps:10}]
             assert.deepEqual(actual, expected);
         })
         it('should calculate T2a, fourth week', () => {
             const jacked = new JackednTan2();
             const actual = jacked.getExpectedSets(4, 'T2a', 100);
-            const expected: ExpectedSet[] = [{weight:75,reps:4},{weight:75,reps:4},{weight:75,reps:4},{weight:75,reps:4},{weight:75,reps:4}]
+            const expected: ExpectedSet[] = [{weight:80,reps:4},{weight:80,reps:4},{weight:80,reps:4},{weight:80,reps:4},{weight:80,reps:4}]
             assert.deepEqual(actual, expected);
         })
         it('should calculate T2a, fifth week', () => {
             const jacked = new JackednTan2();
             const actual = jacked.getExpectedSets(5, 'T2a', 100);
-            const expected: ExpectedSet[] = [{weight:80,reps:2},{weight:80,reps:2},{weight:80,reps:2},{weight:80,reps:2},{weight:80,reps:2},{weight:80,reps:2},{weight:80,reps:2}]
+            const expected: ExpectedSet[] = [{weight:85,reps:2},{weight:85,reps:2},{weight:85,reps:2},{weight:85,reps:2},{weight:85,reps:2},{weight:85,reps:2},{weight:85,reps:2}]
             assert.deepEqual(actual, expected);
         })
         it('should calculate T2a, six week', () => {
@@ -50,5 +50,30 @@ describe('JackednTan2', () => {
             assert.deepEqual(actual, expected);
         })
     })
- 
+    describe('T2b', () => {
+        it('should calculate T2b, first week', () => {
+            const jacked = new JackednTan2();
+            const actual = jacked.getExpectedSets(1, 'T2b', 100);
+            const expected: ExpectedSet[] = [{weight:'Set1',reps:15},{weight:'Set1',reps:'MR'},{weight:'Set1',reps:'MR'},{weight:'Set1',reps:'MR'}]
+            assert.deepEqual(actual, expected);
+        })
+        it('should calculate T2b, fourth week', () => {
+            const jacked = new JackednTan2();
+            const actual = jacked.getExpectedSets(4, 'T2b', 100);
+            const expected: ExpectedSet[] = [{weight:'Set1',reps:8},{weight:'Set1',reps:'MR'},{weight:'Set1',reps:'MR'},{weight:'Set1',reps:'MR'}]
+            assert.deepEqual(actual, expected);
+        })
+        it('should calculate T2b, fifth week', () => {
+            const jacked = new JackednTan2();
+            const actual = jacked.getExpectedSets(5, 'T2b', 100);
+            const expected: ExpectedSet[] = [{weight:'Set1',reps:6},{weight:'Set1',reps:'MR'},{weight:'Set1',reps:'MR'},{weight:'Set1',reps:'MR'}]
+            assert.deepEqual(actual, expected);
+        })
+        it('should calculate T2b, six week', () => {
+            const jacked = new JackednTan2();
+            const actual = jacked.getExpectedSets(6, 'T2b', 100);
+            const expected: ExpectedSet[] = []
+            assert.deepEqual(actual, expected);
+        })
+    })
 })
