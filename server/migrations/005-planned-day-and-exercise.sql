@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS planned_exercise (
     pt_pt_id INTEGER NOT NULL,
     tm NUMERIC,
     UNIQUE (pld_pld_id, ex_ex_id) ON CONFLICT ABORT
-    FOREIGN KEY (pld_pld_id) REFERENCES planned_day(pl_id)
+    FOREIGN KEY (pld_pld_id) REFERENCES planned_day(pld_id)
     FOREIGN KEY (ex_ex_id) REFERENCES exercise(ex_id)
     FOREIGN KEY (pt_pt_id) REFERENCES progression_type(pt_id)
 );
