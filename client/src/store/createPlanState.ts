@@ -32,7 +32,7 @@ const day = (dayNumber: number, weekDay: string): plannedDay => ({
     { name: '', progression: 'T1', tm: null },
     { name: '', progression: 'T2a', tm: null },
     { name: '', progression: 'T2b', tm: null },
-    { name: '', progression: 'T2c', tm: null },
+    { name: '', progression: 'T2b', tm: null },
     { name: '', progression: 'T3', tm: null },
     { name: '', progression: 'T3', tm: null },
     { name: '', progression: 'T3', tm: null },
