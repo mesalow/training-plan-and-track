@@ -17,7 +17,7 @@ export class JackednTan2 {
       case "T2b":
         return T2b(weekNumber, tm);
       case "T3":
-        return T2b(weekNumber, tm);
+        return T3(weekNumber, tm);
       default:
         return [];
     }
@@ -60,18 +60,17 @@ function T2b(weekNumber, tm): ExpectedSet[] {
     return [];
   }
   const repTable = [15, 12, 10, 8, 6];
-  const weight = "Set1";
   const reps = repTable[weekNumber - 1];
-  return [{ weight, reps }, ...times({ weight, reps: "MR" } as ExpectedSet, 3)];
+  return [{ weight: "RM", reps }, ...times({ weight: 'Set1', reps: "MR" } as ExpectedSet, 3)];
 }
 
-function T3(weekNumber, tm) {
+function T3(weekNumber, tm): ExpectedSet[] {
   if (weekNumber === 6) {
     return [];
   }
   const repTable = [20, 18, 16, 14, 12];
   const reps = repTable[weekNumber - 1];
-  return [{ weight: "RM", reps }, ...times({ weight: "Set1", reps: "MR" }, 4)];
+  return [{ weight: "RM", reps }, ...times({ weight: "Set1", reps: "MR" } as ExpectedSet, 3)];
 }
 
 function times<T>(element: T, number): T[] {
