@@ -7,7 +7,7 @@
   </div>
 </template>
 <script lang="ts">
-import { reactive } from 'vue';
+import { reactive, watch } from 'vue';
 import { saveActualSet } from '../../api';
 
 export default {
@@ -37,11 +37,19 @@ export default {
       required: true,
     },
   },
-  setup(props:any, context:any) {
+  setup(props: any, context: any) {
     const setInput = reactive({
-      weight: props.expectedSet.weight,
+      weight: props.expectedSet.weight, // TODO: is not reactive when props are updated.
+      // props.expectedSet.weight gets updated, but setInput.weight via the input model does not
       reps: props.expectedSet.reps,
     });
+    watch(
+      () => props.expectedSet,
+      (newValue) => {
+        setInput.weight = newValue.weight;
+        setInput.reps = newValue.reps;
+      },
+    );
     const submit = async () => {
       console.log('submit', setInput.weight, setInput.reps);
       const body = {
@@ -55,7 +63,7 @@ export default {
       await saveActualSet(props.planId, body);
       context.emit('save');
     };
-    return { submit, setInput };
+    return { submit, setInput, props };
   },
 };
 </script>
