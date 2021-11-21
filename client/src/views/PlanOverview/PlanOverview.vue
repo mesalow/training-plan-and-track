@@ -5,22 +5,14 @@
       Week {{ week.weekNumber }}:
       <div v-for="day in week.days" :key="day.dayNumber">
         Day: {{ day.dayNumber }}<br />
-        <div v-for="exercise in day.exercises" :key="exercise.name">
-          {{ exercise.name }}<br />
-          <div v-for="(set, idx) in exercise.sets" :key="idx">
-            <done-set v-if="set.weight" :weight="set.weight" :reps="set.reps"></done-set>
-            <set-input
-              v-else
-              :exerciseName="exercise.name"
-              :planId="state.currentPlanId"
-              :weekNumber="week.weekNumber"
-              :dayNumber="day.dayNumber"
-              :setNumber="idx + 1"
-              :expectedSet="set.expected"
-              @save="load"
-            ></set-input>
-          </div>
-        </div>
+        <exercise
+          v-for="exercise in day.exercises"
+          :key="exercise.name"
+          :exercise="exercise"
+          :weekNumber="week.weekNumber"
+          :dayNumber="day.dayNumber"
+          @save="load"
+        ></exercise>
       </div>
     </div>
   </div>
@@ -29,28 +21,16 @@
 <script lang="ts">
 import { onBeforeMount } from 'vue';
 import { useState, ShowPlanState } from '../../store/showPlanState';
-import { getProgress } from '../../api';
-import SetInput from './SetInput.vue';
-import DoneSet from './DoneSet.vue';
+
+import Exercise from './Exercise.vue';
 
 export default {
   components: {
-    SetInput,
-    DoneSet,
+    Exercise,
   },
   setup() {
     const state = useState() as ShowPlanState;
-    const load = async () => {
-      try {
-        const response = await getProgress(state.currentPlanId);
-        console.log('loaded current plan %o', response);
-
-        state.currentPlan = response;
-        console.log('loaded current plan %o', state.currentPlan);
-      } catch (error) {
-        console.error('showPlans.beforeMount error', error);
-      }
-    };
+    const load = async () => state.load(state);
     onBeforeMount(load);
     return { state, load };
   },
