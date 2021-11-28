@@ -2,7 +2,11 @@
   <div>
     {{ exercise.name }}<br />
     <div v-for="(set, idx) in exercise.sets" :key="idx">
-      <done-set v-if="set.weight" :weight="set.weight" :reps="set.reps"></done-set>
+      <done-set
+        v-if="set.weight !== null && set.weight !== undefined"
+        :weight="set.weight"
+        :reps="set.reps"
+      ></done-set>
       <set-input
         v-else
         :exerciseName="exercise.name"
