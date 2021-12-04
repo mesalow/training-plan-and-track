@@ -14,7 +14,14 @@
           @save="load"
         ></exercise>
       </div>
-    </div>
+    <week
+      class="week-container"
+      v-for="week in state.currentPlan"
+      :key="week.weekNumber"
+      :week="week"
+      v-show="selectedWeek === week.weekNumber"
+    >
+    </week>
   </div>
 </template>
 
@@ -22,11 +29,11 @@
 import { onBeforeMount } from 'vue';
 import { useState, ShowPlanState } from '../../store/showPlanState';
 
-import Exercise from './Exercise.vue';
+import Week from './Week.vue';
 
 export default {
   components: {
-    Exercise,
+    Week,
   },
   setup() {
     const state = useState() as ShowPlanState;
