@@ -1,3 +1,14 @@
+# How to use
+## Dev
+Run: "docker-compose up"
+To shut down the containers:
+"docker-compose down"
+
+This will restart both the app container (node.js backend) as well as the client (vue.js app) on file change.
+
+## Prod
+Run: "docker-compose -f ./docker-compose-prod.yml up"
+Here there will be no file watch, so only use this to use the app normally (for tracking your training progress).
 # training-plan-and-track
 ## Basis stack
 The backend for this app should consist of a node.js-server written in typescript and a sqlite db for persistence.
