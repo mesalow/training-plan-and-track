@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="set-input">
     Not done! Expected weight: {{ expectedSet.weight }} Reps: {{ expectedSet.reps }}
     <label>Weight:<input v-model="setInput.weight" type="text"/></label>
     <label>Reps:<input v-model="setInput.reps" type="text"/></label>
-    <div @click="submit">Submit</div>
+    <div @click="submit" class="btn">Submit</div>
   </div>
 </template>
 <script lang="ts">
@@ -67,3 +67,15 @@ export default {
   },
 };
 </script>
+<style scoped>
+.set-input {
+  margin-bottom: 1em;
+}
+
+.btn {
+  background-color: whitesmoke;
+  border: 1px darkgreen solid;
+  border-radius: 3px;
+  width: 50%;
+}
+</style>

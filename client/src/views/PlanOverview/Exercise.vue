@@ -1,6 +1,6 @@
 <template>
-  <div>
-    {{ exercise.name }}<br />
+  <div class="exercise">
+    <p class="exercise--title">{{ exercise.name }}</p>
     <div v-for="(set, idx) in exercise.sets" :key="idx">
       <done-set
         v-if="set.weight !== null && set.weight !== undefined"
@@ -44,4 +44,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.exercise {
+    background-color:beige;
+    margin-bottom: 1em;
+    padding:0.5em;
+}
+
+.exercise--title {
+    font-size:125%;
+}
+</style>

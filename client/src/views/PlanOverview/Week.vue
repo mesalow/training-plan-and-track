@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     Week {{ week.weekNumber }}:
     <div class="day-container" v-for="day in week.days" :key="day.dayNumber">
       Day: {{ day.dayNumber }}<br />
@@ -37,5 +37,9 @@ export default {
 <style>
 .day-container {
   background-color: aliceblue;
+  flex: 1;
+  border: 1px black solid;
+  margin: 1em;
+  padding: 1em;
 }
 </style>
