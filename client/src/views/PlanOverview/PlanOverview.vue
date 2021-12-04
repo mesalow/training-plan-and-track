@@ -1,19 +1,14 @@
 <template>
   <div class="planoverview" v-if="state.currentPlan">
     <div>This is the plan {{ state.currentPlanId }} with {{ state.currentPlan.length }} weeks</div>
-    <div v-for="week in state.currentPlan" :key="week.weekNumber">
-      Week {{ week.weekNumber }}:
-      <div v-for="day in week.days" :key="day.dayNumber">
-        Day: {{ day.dayNumber }}<br />
-        <exercise
-          v-for="exercise in day.exercises"
-          :key="exercise.name"
-          :exercise="exercise"
-          :weekNumber="week.weekNumber"
-          :dayNumber="day.dayNumber"
-          @save="load"
-        ></exercise>
-      </div>
+    <div>
+      Choose the week:
+      <select v-model="selectWeek" @change="showWeek"
+        ><option v-for="week in state.currentPlan" :key="week.weekNumber"
+          >{{ week.weekNumber }}
+        </option></select
+      >
+    </div>
     <week
       class="week-container"
       v-for="week in state.currentPlan"
@@ -26,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { onBeforeMount } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import { useState, ShowPlanState } from '../../store/showPlanState';
 
 import Week from './Week.vue';
@@ -39,9 +34,18 @@ export default {
     const state = useState() as ShowPlanState;
     const load = async () => state.load(state);
     onBeforeMount(load);
-    return { state, load };
+    const selectedWeek = ref(1);
+    const showWeek = (e: any) => {
+      console.log(e);
+      selectedWeek.value = parseInt(e.target.value, 10);
+    };
+    return { state, showWeek, selectedWeek };
   },
 };
 </script>
 
-<style></style>
+<style>
+.week-container {
+  display: flex;
+}
+</style>
