@@ -5,7 +5,7 @@ export interface IControllerConstructor  {
 }
 export interface IBaseController {
     handleGetAll(params: string[], requestBody: string): Promise<string>;
-    handleGet(params: string[], requestBody: string): Promise<string>;
+    handleGet(params: string[], requestBody: string, queryParams?: string[][]): Promise<string>;
     handlePost(params: string[], requestBody: string): Promise<string>;
 }
 

@@ -17,11 +17,21 @@ export class Router {
     /**
      * route has the form /param1/param2, the split means, that the first element - here called _leading - will be an empty string
      */
-    const [_leading, type, ...rest] = route.split("/");
+    const [urlParamString, queryParamString] = route.split("?");
+    let queryParams: object;
+    if (queryParamString) {
+      queryParams = queryParamString.split("&").reduce((agg,keyValueString) => { 
+        const [key, value] = keyValueString.split("=")
+        agg[key] = value;
+        return agg; 
+      }, {});
+    }
+    const [_leading, type, ...rest] = urlParamString.split("/");
     if (type === "api") {
       /**
        * RESTish API, first param is the resource request, the following are params
        */
+      
       const [resource, ...params] = rest;
       const controller = await this.routeAPI(resource);
       const reqMethod = request.method;
@@ -39,7 +49,8 @@ export class Router {
         }
         const responseBody = await controller[methodName](
           params,
-          requestAsJson
+          requestAsJson, 
+          queryParams
         );
         response.writeHead(200, {
           "Content-Type": "application/json",
@@ -100,6 +111,7 @@ export class Router {
       exercise: "ExerciseController", // get all exercises
       plan: "PlanController", // create new Plan
       training: "TrainingController", // get training progress
+      records: "RecordController", // get personal records for exercises
     };
     if (routings[route]) {
       return routings[route];

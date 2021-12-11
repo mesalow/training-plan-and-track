@@ -3,6 +3,7 @@ import { open } from "sqlite";
 import { ExerciseRepository } from "./ExerciseRepository";
 import { PlanRepository } from "./PlanRepository";
 import { TrainingRepository } from "./TrainingRepository";
+import { RecordRepository } from "./RecordRepository";
 
 export class RepositoryManager {
   private repositories;
@@ -18,6 +19,7 @@ export class RepositoryManager {
       ExerciseRepository: new ExerciseRepository(db),
       PlanRepository: new PlanRepository(db),
       TrainingRepository: new TrainingRepository(db),
+      RecordRepository: new RecordRepository(db),
     };
   }
   private getRepo(repoName: string) {
@@ -31,5 +33,8 @@ export class RepositoryManager {
   }
   getTrainingRepo(): TrainingRepository {
     return this.getRepo("TrainingRepository");
+  }
+  getRecordRepo(): RecordRepository {
+    return this.getRepo("RecordRepository")
   }
 }
