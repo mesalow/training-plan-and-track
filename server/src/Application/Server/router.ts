@@ -111,7 +111,7 @@ export class Router {
       exercise: "ExerciseController", // get all exercises
       plan: "PlanController", // create new Plan
       training: "TrainingController", // get training progress
-      records: "RecordController", // get personal records for exercises
+      record: "RecordController", // get personal records for exercises
     };
     if (routings[route]) {
       return routings[route];
