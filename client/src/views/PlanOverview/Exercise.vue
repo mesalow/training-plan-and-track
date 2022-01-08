@@ -10,6 +10,7 @@
       <set-input
         v-else
         :exerciseName="exercise.name"
+        :exerciseId="exercise.id"
         :planId="state.currentPlanId"
         :weekNumber="weekNumber"
         :dayNumber="dayNumber"

@@ -38,3 +38,5 @@ export const getAllPlans = async () => sendRequest('plan');
 export const getProgress = async (id: number) => sendRequest(`training/${id}`);
 export const createPlan = async (body: any) => sendRequest('plan', 'POST', undefined, body);
 export const saveActualSet = async (id: number, body: ActualSetData) => sendRequest(`training/${id}`, 'POST', undefined, body);
+export const getRecordByReps = async (exerciseId: number, reps: number) => sendRequest(`record/${exerciseId}?byReps=${reps}`);
+export const getRecordByWeight = async (exerciseId: number, weight: number) => sendRequest(`record/${exerciseId}?byWeight=${weight}`);
