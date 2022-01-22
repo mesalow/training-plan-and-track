@@ -20,7 +20,7 @@ const updateSet1 = (exercise: any) => {
   if (!exercise.sets[0]) {
     console.log('warning: %o', exercise);
   }
-  if (!exercise.sets[0].weight) {
+  if (exercise.sets[0].weight === null || exercise.sets[0].weight === undefined) {
     return exercise;
   }
   rExercise.sets = exercise.sets.map((set: any) => {
@@ -28,7 +28,7 @@ const updateSet1 = (exercise: any) => {
     if (set.expected.weight === 'Set1') {
       rSet.expected.weight = exercise.sets[0].weight;
     }
-    return set;
+    return rSet;
   });
   return rExercise;
 };
