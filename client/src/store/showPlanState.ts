@@ -38,7 +38,7 @@ const updatePlan = (plan: any) => plan.map((week: any) => {
   rweek.days = week.days.map((day: any) => {
     const rday = day;
     rday.exercises = day.exercises.map((exercise: any) => {
-      if (exercise.sets.length && (exercise.progression === 'T3' || exercise.progression === 'T2b')) {
+      if (exercise.sets.length && (exercise.progression === 'T3' || exercise.progression === 'T2b' || exercise.progression === 'T2a')) {
         return updateSet1(exercise);
       }
       return exercise;

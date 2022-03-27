@@ -37,7 +37,7 @@ function T1(weekNumber: number, tm: number): ExpectedSet[] {
   if (weekNumber === 6) {
     return [firstSet];
   }
-  const straightSets =
+  const straightSets: ExpectedSet[] =
     weekNumber === 5
       ? times({ weight, reps: currentReps }, 3)
       : times({ weight, reps: currentReps }, 2);
@@ -53,7 +53,7 @@ function T2a(weekNumber, tm): ExpectedSet[] {
   const numberOfSets = weekNumber === 5 ? 7 : weekNumber === 4 ? 5 : 4;
   const weight = progressionTable[weekNumber - 1] * tm;
   const reps = repTable[weekNumber - 1];
-  return times({ weight, reps }, numberOfSets);
+  return [{weight, reps}, ...times({ weight: 'Set1', reps } as ExpectedSet, numberOfSets-1)];
 }
 function T2b(weekNumber, tm): ExpectedSet[] {
   if (weekNumber === 6) {
