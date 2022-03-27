@@ -1,9 +1,17 @@
 <template>
   <div class="set-input" @mouseover="getRecord">
     Not done! Expected weight: {{ expectedSet.weight }} Reps: {{ expectedSet.reps }}
-    <label>Weight:<input v-model="setInput.weight" type="text"/></label>
-    <label>Reps:<input v-model="setInput.reps" type="text"/></label>
-    <div @click="submit" class="btn">Submit</div>
+    <label>Weight:<input v-model="setInput.weight" type="text" /></label>
+    <label>Reps:<input v-model="setInput.reps" type="text" /></label>
+    <div
+      @click="submit"
+      @keydown.prevent.enter="submit"
+      @keydown.prevent.space="submit"
+      tabindex="0"
+      class="btn"
+    >
+      Submit
+    </div>
     <div v-if="record.weight > 0">Best weight {{ record.weight }} with reps {{ record.reps }}</div>
   </div>
 </template>
