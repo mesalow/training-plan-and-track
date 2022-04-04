@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-blue-500">
     <div>
       <Overview v-if="state.currentDisplay === 'overview'" />
       <div v-else-if="state.currentDisplay !== 'overview'" @click="backToOverview">
@@ -36,14 +36,3 @@ export default {
   },
 };
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

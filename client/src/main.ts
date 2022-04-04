@@ -4,6 +4,8 @@ import { stateSymbol as createStateSymbol, createState } from './store/createPla
 import { stateSymbol as rootStateSymbol, createState as createRootState } from './store/rootState';
 import { stateSymbol as showPlanStateSymbol, createState as createShowPlanState } from './store/showPlanState';
 
+import './assets/styles/index.css';
+
 createApp(App)
   .provide(createStateSymbol, createState())
   .provide(rootStateSymbol, createRootState())
