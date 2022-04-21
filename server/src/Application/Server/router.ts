@@ -70,6 +70,9 @@ export class Router {
         const fileType = fileName.split(".")[1];
         if (["js", "css", "html"].includes(fileType)) {
           const responseBody = await controller.handleTextFile(rest.join("/"));
+          if (fileType === 'js') {
+            response.setHeader('content-type', 'application/javascript');
+          }
           response.write(responseBody);
         } else {
           const responseBody = await controller.handleBinaryFile(
